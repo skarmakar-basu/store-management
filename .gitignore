@@ -1,0 +1,14 @@
+# Node
+node_modules/
+dist/
+build/
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+
+# Cursor caches (none by default, kept for future)
+.cursor/cache/

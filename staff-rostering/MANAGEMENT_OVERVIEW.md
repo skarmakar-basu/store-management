@@ -97,14 +97,14 @@ We are building an AI-driven workforce scheduling platform that automates roster
 **What it does:** Proactive gap detection, alerts, and actionable recommendations for roster disruptions
 
 **Key Features:**
-- **Absence Detection:** Detects when employees don't clock in at scheduled time; alerts manager within minutes
-- **Gap Analysis:** Identifies coverage gaps in real-time (no-show, late arrival, early departure)
-- **Task Redistribution:** Suggests how to redistribute absent employee's tasks among available staff
-- **Replacement Recommendations:** Recommends eligible employees to call in (available, qualified, within hours)
-- **Demand Surge Detection:** Monitors real-time foot traffic/sales data for sudden increases
-- **Surge Response:** Suggests immediate actions (call backup, extend shifts, redistribute tasks)
-- **Forecasted Gaps:** Predicts potential coverage gaps and recommends preventive actions
-- **One-Click Actions:** Enables managers to approve recommendations with single click
+- Detects absences when employees don't clock in at scheduled time; alerts manager within minutes
+- Identifies coverage gaps in real-time (no-show, late arrival, early departure)
+- Suggests how to redistribute absent employee's tasks among available staff
+- Recommends eligible employees to call in (available, qualified, within hours)
+- Monitors real-time foot traffic/sales data for sudden demand increases
+- Suggests immediate actions for demand surges (call backup, extend shifts, redistribute tasks)
+- Predicts potential coverage gaps and recommends preventive actions
+- Enables managers to approve recommendations with single click
 
 **Business Value:** Prevents operational disruptions while enabling rapid response and reducing crisis decision-making time
 

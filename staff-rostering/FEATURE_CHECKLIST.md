@@ -13,6 +13,13 @@ Use this during vendor demos to quickly score each solution.
 | ↳ Availability constraints | ⬜ | ⬜ | ⬜ | |
 | ↳ Contract hours enforcement | ⬜ | ⬜ | ⬜ | |
 | ↳ Conflict detection | ⬜ | ⬜ | ⬜ | |
+| **Task-Based Scheduling** | ⬜ | ⬜ | ⬜ | |
+| ↳ Define operational tasks | ⬜ | ⬜ | ⬜ | |
+| ↳ Task-to-manpower calculation | ⬜ | ⬜ | ⬜ | |
+| ↳ Task prioritization (P0/P1/P2) | ⬜ | ⬜ | ⬜ | |
+| ↳ Frequency-based scheduling | ⬜ | ⬜ | ⬜ | |
+| ↳ Store-specific configuration | ⬜ | ⬜ | ⬜ | |
+| ↳ Integration with demand forecast | ⬜ | ⬜ | ⬜ | |
 | **Demand Forecasting** | ⬜ | ⬜ | ⬜ | |
 | ↳ Sales data integration | ⬜ | ⬜ | ⬜ | |
 | ↳ Peak hour identification | ⬜ | ⬜ | ⬜ | |
@@ -32,7 +39,7 @@ Use this during vendor demos to quickly score each solution.
 | ↳ Offline schedule viewing | ⬜ | ⬜ | ⬜ | |
 | ↳ Push notifications | ⬜ | ⬜ | ⬜ | |
 
-**P0 Score:** ___/25 | ___/25 | ___/25
+**P0 Score:** ___/31 | ___/31 | ___/31
 
 ---
 
@@ -137,30 +144,36 @@ Use this during vendor demos to quickly score each solution.
 2. "What happens if we accidentally double-book someone?"
 3. "Can you enforce a rule that part-timers can't exceed 20 hours/week?"
 
+### Task-Based Scheduling
+4. "Can we set up a recurring task like 'Delivery unloading every Monday, Wednesday, Friday from 7-9 AM requiring 3 people with forklift certification'?"
+5. "Show us how the system calculates total manpower when we have both operational tasks (stocking) and customer service needs (cashiers) for the same time period."
+6. "Can we configure one store to use task-based scheduling and another store to use only demand-based scheduling?"
+7. "What happens if a P0 task (like 'Floor sweeping every 2 hours') doesn't have enough qualified staff scheduled?"
+
 ### Compliance
-4. "How do you handle different state labor laws across our locations?"
-5. "Show us the audit trail for a schedule change made 2 months ago."
-6. "What happens if a manager tries to schedule someone for 10 days straight?"
+8. "How do you handle different state labor laws across our locations?"
+9. "Show us the audit trail for a schedule change made 2 months ago."
+10. "What happens if a manager tries to schedule someone for 10 days straight?"
 
 ### Mobile Experience
-7. "Can an employee view their schedule without internet?"
-8. "What does the push notification look like for a schedule change?"
-9. "How accurate is the GPS geofencing for clock-ins?"
+11. "Can an employee view their schedule without internet?"
+12. "What does the push notification look like for a schedule change?"
+13. "How accurate is the GPS geofencing for clock-ins?"
 
 ### Integrations
-10. "Walk us through the payroll integration setup with [YOUR SYSTEM]."
-11. "Can we import sales data from [YOUR POS] for forecasting?"
-12. "What's your API rate limit, and what happens if we exceed it?"
+14. "Walk us through the payroll integration setup with [YOUR SYSTEM]."
+15. "Can we import sales data from [YOUR POS] for forecasting?"
+16. "What's your API rate limit, and what happens if we exceed it?"
 
 ### Cost Management
-13. "Show us the labor cost dashboard during schedule creation."
-14. "Can we set different budgets for weekdays vs weekends?"
-15. "How do overtime alerts work—real-time or batch?"
+17. "Show us the labor cost dashboard during schedule creation."
+18. "Can we set different budgets for weekdays vs weekends?"
+19. "How do overtime alerts work—real-time or batch?"
 
 ### Support
-16. "What's included in your standard support tier?"
-17. "Can we get a dedicated account manager?"
-18. "What's your average time-to-resolution for critical bugs?"
+20. "What's included in your standard support tier?"
+21. "Can we get a dedicated account manager?"
+22. "What's your average time-to-resolution for critical bugs?"
 
 ---
 
@@ -168,6 +181,9 @@ Use this during vendor demos to quickly score each solution.
 
 - ❌ No API documentation available
 - ❌ "We can build that custom for you" (for P0 features)
+- ❌ Task-based scheduling requires manual workarounds or spreadsheets
+- ❌ Cannot configure task-based mode per store (all-or-nothing approach)
+- ❌ Task requirements and demand forecasting operate in silos (no integration)
 - ❌ Mobile app is just a web wrapper
 - ❌ No compliance module for your region
 - ❌ Payroll integration requires CSV uploads
@@ -186,7 +202,8 @@ When calling current customers:
 1. **Reliability:** "How many unplanned outages have you experienced in the last 6 months?"
 2. **Support:** "When you have an urgent issue, how quickly do they respond?"
 3. **Accuracy:** "Have you had any payroll errors due to the system?"
-4. **Adoption:** "What % of your employees actively use the mobile app?"
-5. **Hidden Costs:** "Were there any surprise fees not in the initial quote?"
-6. **Regrets:** "What do you wish you'd known before choosing this vendor?"
-7. **Alternatives:** "If you were choosing today, would you still pick them?"
+4. **Task Management:** "If you use task-based scheduling, how well does it handle operational requirements versus customer service needs?"
+5. **Adoption:** "What % of your employees actively use the mobile app?"
+6. **Hidden Costs:** "Were there any surprise fees not in the initial quote?"
+7. **Regrets:** "What do you wish you'd known before choosing this vendor?"
+8. **Alternatives:** "If you were choosing today, would you still pick them?"

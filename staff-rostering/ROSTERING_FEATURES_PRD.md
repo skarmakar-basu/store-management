@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-**For stakeholders:** Research identifies 15 critical features for retail rostering spanning scheduling automation, compliance, and workforce engagement. Top priorities (P0/P1) focus on automated scheduling, labor cost control, and mobile access—features that deliver 70%+ of expected ROI while addressing our mixed workforce (FTE + contractors) and multi-store complexity.
+**For stakeholders:** Research identifies 16 critical features for retail rostering spanning scheduling automation, operational task management, compliance, and workforce engagement. Top priorities (P0/P1) focus on automated scheduling, task-based workforce planning (critical for grocery/supermarket formats), labor cost control, and mobile access—features that deliver 70%+ of expected ROI while addressing our mixed workforce (FTE + contractors), multi-store complexity, and store format variations.
 
 ---
 
@@ -26,16 +26,31 @@
   - Conflict detection (double-booking, overtime triggers)
   - Template support for recurring schedules
 
-#### 2. **Demand-Based Forecasting**
-- **Description:** Aligns staffing levels with predicted foot traffic and sales
+#### 2. **Task & Activity-Based Scheduling**
+- **Description:** Calculates manpower requirements based on operational tasks (deliveries, stocking, cleaning) alongside customer service needs
+- **Why Critical:** Ensures operational tasks are completed; prevents operational failures (unloaded deliveries, unstocked shelves); optimizes labor allocation
+- **Applicability:** P0 for grocery/supermarket/hypermarket formats; P2 for boutique/fashion/specialty stores (configurable per store type)
+- **Key Capabilities:**
+  - Define recurring operational tasks (e.g., "Delivery unloading Mon/Wed/Fri 7-9 AM")
+  - Task prioritization (P0/P1/P2 activities with mandatory completion)
+  - Task-to-manpower calculation (e.g., "3 people × 2 hours for unloading")
+  - Task-specific skill requirements (e.g., forklift certification, inventory scanner trained)
+  - Frequency-based scheduling (every 2 hours, daily, specific days)
+  - Store-specific task variation (tasks differ by location/format)
+  - Integration with demand forecasting (task requirements + customer service = total manpower)
+  - Task completion tracking and compliance monitoring
+
+#### 3. **Demand-Based Forecasting**
+- **Description:** Aligns staffing levels with predicted foot traffic and sales for customer-facing roles
 - **Why Critical:** Prevents understaffing (lost sales) and overstaffing (wasted labor cost)
 - **Key Capabilities:**
   - Historical sales data integration
   - Seasonal/event-based adjustments
   - Peak hour identification
   - Recommended staffing levels by role/store
+  - Integrates with task-based scheduling for unified manpower planning
 
-#### 3. **Labor Cost Management & Budgeting**
+#### 4. **Labor Cost Management & Budgeting**
 - **Description:** Real-time tracking of labor spend against budgets with proactive alerts
 - **Why Critical:** Direct P&L impact; prevents budget overruns
 - **Key Capabilities:**
@@ -45,7 +60,7 @@
   - Different pay rates for FTE vs contractors
   - Labor % of revenue tracking
 
-#### 4. **Compliance Engine**
+#### 5. **Compliance Engine**
 - **Description:** Automated monitoring and enforcement of labor laws, awards, and policies
 - **Why Critical:** Legal risk mitigation; fines can exceed $10k per violation
 - **Key Capabilities:**
@@ -56,7 +71,7 @@
   - Contract term limits for part-time workers
   - Audit trail for compliance reporting
 
-#### 5. **Mobile App (Employee & Manager)**
+#### 6. **Mobile App (Employee & Manager)**
 - **Description:** Native iOS/Android apps for schedule access and management
 - **Why Critical:** Workforce expects mobile-first; reduces communication friction
 - **Key Capabilities:**
@@ -71,7 +86,7 @@
 
 ### **P1 - High Priority** (Competitive Differentiation)
 
-#### 6. **Employee Self-Service Portal**
+#### 7. **Employee Self-Service Portal**
 - **Description:** Web/mobile interface for employees to manage their work life
 - **Key Capabilities:**
   - Set recurring availability preferences
@@ -81,7 +96,7 @@
   - Request shift preferences
   - Update personal details
 
-#### 7. **Shift Swapping & Marketplace**
+#### 8. **Shift Swapping & Marketplace**
 - **Description:** Peer-to-peer shift trading with approval workflows
 - **Key Capabilities:**
   - Propose swaps to eligible colleagues
@@ -90,7 +105,7 @@
   - Manager approval gateway
   - Automated roster updates post-approval
 
-#### 8. **Time & Attendance Tracking**
+#### 9. **Time & Attendance Tracking**
 - **Description:** Accurate capture of actual hours worked
 - **Key Capabilities:**
   - Multiple clock-in methods (mobile GPS, kiosk, web)
@@ -99,7 +114,7 @@
   - Timesheet editing with approval chain
   - Exception flagging (late, no-show, early departure)
 
-#### 9. **Leave Management System**
+#### 10. **Leave Management System**
 - **Description:** Unified platform for all leave requests (vacation, sick, personal)
 - **Key Capabilities:**
   - Balance tracking per leave type
@@ -108,7 +123,7 @@
   - Blackout period enforcement (e.g., holiday season)
   - Accrual calculations
 
-#### 10. **System Integrations**
+#### 11. **System Integrations**
 - **Description:** Bi-directional data sync with existing systems
 - **Why Critical:** Eliminates duplicate data entry; ensures single source of truth
 - **Key Integrations:**
@@ -125,7 +140,7 @@
 
 ### **P2 - Nice to Have** (Incremental Value)
 
-#### 11. **Real-Time Notifications & Communication**
+#### 12. **Real-Time Notifications & Communication**
 - Push notifications, SMS, email for:
   - Schedule published/changed
   - Shift reminders (2 hours before)
@@ -133,26 +148,26 @@
   - Manager broadcasts
 - In-app messaging (manager ↔ staff)
 
-#### 12. **Advanced Analytics & Reporting**
+#### 13. **Advanced Analytics & Reporting**
 - Pre-built reports: labor cost by store/period, attendance trends, overtime analysis
 - Custom report builder
 - Interactive dashboards with drill-downs
 - Export to PDF/Excel
 - Scheduled report delivery
 
-#### 13. **Employee Skill & Certification Tracking**
+#### 14. **Employee Skill & Certification Tracking**
 - Maintain skills matrix (cashier, forklift, keyholder, etc.)
 - Certification expiry tracking with renewal alerts
 - Auto-restrict scheduling if cert expired
 - Training history integration
 
-#### 14. **Multi-Location Management**
+#### 15. **Multi-Location Management**
 - Store hierarchy and groupings
 - Cross-store shift visibility (for staff working multiple locations)
 - Aggregate reporting across locations
 - Location-specific policies (different state laws)
 
-#### 15. **Employee Engagement Features**
+#### 16. **Employee Engagement Features**
 - Shift preference ranking
 - Work-life balance scoring
 - Feedback/survey tools
@@ -172,12 +187,13 @@
 | Feature | Reach | Impact | Confidence | Effort | RICE Score | Priority |
 |---------|-------|--------|------------|--------|------------|----------|
 | Automated Scheduling | 100 | 3 | 100% | 2 | **150** | P0 |
-| Labor Cost Management | 100 | 3 | 100% | 1.5 | **200** | P0 |
-| Mobile App | 100 | 2 | 100% | 3 | **67** | P0 |
-| Compliance Engine | 100 | 3 | 80% | 2 | **120** | P0 |
+| Task-Based Scheduling | 70 | 3 | 80% | 2 | **84** | P0* |
 | Demand Forecasting | 80 | 2 | 80% | 2.5 | **51** | P0 |
-| Shift Swapping | 90 | 1 | 100% | 1 | **90** | P1 |
+| Labor Cost Management | 100 | 3 | 100% | 1.5 | **200** | P0 |
+| Compliance Engine | 100 | 3 | 80% | 2 | **120** | P0 |
+| Mobile App | 100 | 2 | 100% | 3 | **67** | P0 |
 | Self-Service Portal | 100 | 1 | 100% | 1.5 | **67** | P1 |
+| Shift Swapping | 90 | 1 | 100% | 1 | **90** | P1 |
 | Time & Attendance | 100 | 2 | 80% | 2 | **80** | P1 |
 | Leave Management | 100 | 1 | 100% | 1 | **100** | P1 |
 | System Integrations | 60 | 2 | 80% | 4 | **24** | P1 |
@@ -187,7 +203,9 @@
 | Multi-Location Mgmt | 100 | 2 | 100% | 1 | **200** | P1* |
 | Engagement Features | 70 | 0.5 | 50% | 2 | **9** | P2 |
 
-*Multi-location management elevated to P1 given your chain context
+*Task-based scheduling is P0 for grocery/supermarket/hypermarket formats (high operational complexity); P2 for boutique/fashion formats (minimal operational tasks). System must support configurable mode per store.
+
+*Multi-location management elevated to P1 given chain context
 
 ---
 
@@ -197,6 +215,8 @@ When assessing solutions, score each vendor on:
 
 ### Technical Fit (40%)
 - [ ] P0 feature completeness (0-5 scale per feature)
+- [ ] Task-based scheduling capability (configurable per store type)
+- [ ] Integration between task-based and demand forecasting (unified engine)
 - [ ] Integration capabilities with your existing tech stack
 - [ ] Mobile app quality (user ratings, offline support)
 - [ ] API robustness (documentation, rate limits, webhooks)
@@ -248,6 +268,7 @@ When assessing solutions, score each vendor on:
 - **Adoption:** 90%+ employees using mobile app weekly
 - **Satisfaction:** Manager NPS >40, Employee NPS >30
 - **Operational:** Time-to-fill open shifts <24 hours
+- **Task Completion:** 98%+ P0 operational tasks completed on time (for stores using task-based mode)
 
 ---
 

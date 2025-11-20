@@ -8,13 +8,14 @@
 
 ## 📋 Quick Summary
 
-Research completed on rostering solution requirements for retail chain with mixed workforce (full-time + part-time contractors). Identified **15 critical features** across 3 priority tiers.
+Research completed on rostering solution requirements for retail chain with mixed workforce (full-time + part-time contractors) and varying store formats. Identified **16 critical features** across 3 priority tiers.
 
 **Key Findings:**
-- **5 P0 (must-have) features** are deal-breakers: automated scheduling, demand forecasting, labor cost management, compliance engine, and mobile app
-- **6 P1 (high-priority) features** provide competitive advantage and ROI
-- **4 P2 (nice-to-have) features** add incremental value
-- Expected ROI: 70% reduction in scheduling time, ±3% budget variance, zero compliance violations
+- **6 P0 (must-have) features** are deal-breakers: automated scheduling, task-based scheduling (format-dependent), demand forecasting, labor cost management, compliance engine, and mobile app
+- **5 P1 (high-priority) features** provide competitive advantage and ROI
+- **5 P2 (nice-to-have) features** add incremental value
+- Task-based scheduling is critical for operational formats (grocery/supermarket) but optional for boutique/fashion stores
+- Expected ROI: 70% reduction in scheduling time, ±3% budget variance, zero compliance violations, 98%+ task completion
 
 ---
 
@@ -28,21 +29,24 @@ Research completed on rostering solution requirements for retail chain with mixe
 
 ---
 
-## 🎯 Top 5 Must-Have Features (P0)
+## 🎯 Top 6 Must-Have Features (P0)
 
 ### 1. **Automated Schedule Generation**
 AI-driven scheduling that eliminates 80% of manual planning time by handling availability, skills, and business constraints automatically.
 
-### 2. **Demand-Based Forecasting**  
-Aligns staffing with predicted foot traffic using historical sales data—prevents both understaffing (lost revenue) and overstaffing (wasted cost).
+### 2. **Task & Activity-Based Scheduling**
+Calculates manpower requirements based on operational tasks (deliveries, stocking, cleaning) alongside customer service needs. Critical for grocery/supermarket formats; configurable per store type. Prevents operational failures and optimizes labor allocation.
 
-### 3. **Labor Cost Management**  
+### 3. **Demand-Based Forecasting**  
+Aligns staffing with predicted foot traffic using historical sales data—prevents both understaffing (lost revenue) and overstaffing (wasted cost). Integrates with task-based scheduling for unified manpower planning.
+
+### 4. **Labor Cost Management**  
 Real-time budget tracking with proactive overtime alerts; critical for P&L control and supporting different pay rates for FTE vs contractors.
 
-### 4. **Compliance Engine**  
+### 5. **Compliance Engine**  
 Automated enforcement of labor laws (max hours, rest periods, breaks) with audit trails—mitigates legal risk and potential $10k+ fines per violation.
 
-### 5. **Mobile App**  
+### 6. **Mobile App**  
 Native iOS/Android apps for schedule viewing, clock in/out (GPS verified), time-off requests, and shift swapping—meets modern workforce expectations.
 
 ---
@@ -54,6 +58,7 @@ Native iOS/Android apps for schedule viewing, clock in/out (GPS verified), time-
 | **Scheduling Efficiency** | 70% time reduction (7 hrs → 2 hrs/week) |
 | **Labor Cost Accuracy** | Within ±3% of budget |
 | **Compliance** | Zero violations |
+| **Task Completion** | 98%+ P0 operational tasks completed on time |
 | **Employee Adoption** | 90%+ using mobile app weekly |
 | **Manager Satisfaction** | NPS >40 |
 | **Operational Speed** | Fill open shifts in <24 hours |
@@ -120,19 +125,28 @@ Based on market research, consider demos from:
 
 During demos, validate these critical requirements:
 
-1. **"Can you enforce part-time contractors can't exceed 20 hours/week while FTE can work 40?"**  
+1. **"Can your system handle task-based scheduling where we define operational activities like 'Delivery unloading Mon/Wed/Fri 7-9 AM needs 3 people with forklift cert'?"**  
+   *(Tests task-based scheduling capability)*
+
+2. **"How does your system integrate task requirements with demand-based customer service staffing? Can we see a unified schedule?"**  
+   *(Tests integration between task-based and demand forecasting)*
+
+3. **"Can we configure task-based mode for some stores (like supermarkets) but disable it for others (like boutiques)?"**  
+   *(Tests store-specific configurability)*
+
+4. **"Can you enforce part-time contractors can't exceed 20 hours/week while FTE can work 40?"**  
    *(Tests contract hour differentiation)*
 
-2. **"Walk us through the payroll integration with [YOUR SYSTEM]—how do approved timesheets sync?"**  
+5. **"Walk us through the payroll integration with [YOUR SYSTEM]—how do approved timesheets sync?"**  
    *(Tests integration maturity)*
 
-3. **"Show us what happens when a manager tries to schedule someone 10 days straight."**  
+6. **"Show us what happens when a manager tries to schedule someone 10 days straight."**  
    *(Tests compliance engine)*
 
-4. **"Can employees view their schedule without internet on the mobile app?"**  
+7. **"Can employees view their schedule without internet on the mobile app?"**  
    *(Tests offline functionality)*
 
-5. **"How do you handle different state labor laws across our locations?"**  
+8. **"How do you handle different state labor laws across our locations?"**  
    *(Tests multi-jurisdiction compliance)*
 
 ---

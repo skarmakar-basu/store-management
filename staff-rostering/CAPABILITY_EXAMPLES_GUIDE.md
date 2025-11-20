@@ -139,9 +139,514 @@ The system intelligently rotates which employees get which shifts to ensure fair
 
 ---
 
-### Feature 2: Demand-Based Forecasting
+### Feature 2: Task & Activity-Based Scheduling
 
-#### **Capability 2.1: Historical Sales Data Integration**
+#### **Capability 2.1: Define Recurring Operational Tasks**
+
+**Description:**  
+The system allows managers to create and define operational tasks (deliveries, stocking, cleaning, maintenance) with specific requirements for manpower, timing, frequency, and skills. These tasks form the foundation of operational scheduling.
+
+**Real-World Example:**  
+Ramesh manages a BigBazaar hypermarket in Pune with significant operational complexity. He defines these recurring tasks in the system:
+
+**Task 1: Delivery Unloading**
+- **Frequency:** Every Monday, Wednesday, Friday
+- **Time:** 7:00 AM - 9:00 AM
+- **Manpower Required:** 3 people
+- **Skills Required:** Forklift certification, inventory scanner trained
+- **Priority:** P0 (business-critical)
+- **Description:** Unload trucks, verify delivery notes, move boxes to warehouse
+
+**Task 2: Fresh Produce Stocking**
+- **Frequency:** Daily
+- **Time:** 6:00 AM - 8:00 AM
+- **Manpower Required:** 2 people
+- **Skills Required:** Fresh food handling certification
+- **Priority:** P0 (must be ready before store opens)
+
+**Task 3: Floor Sweeping & Cleaning**
+- **Frequency:** Every 2 hours during store hours (8 AM, 10 AM, 12 PM, 2 PM, 4 PM, 6 PM, 8 PM)
+- **Duration:** 30 minutes per round
+- **Manpower Required:** 1 person per floor section (3 total)
+- **Skills Required:** None (general duty)
+- **Priority:** P0 (hygiene compliance)
+
+**Task 4: Shelf Restocking - Grocery Aisle**
+- **Frequency:** Daily
+- **Time:** 11:00 AM - 1:00 PM (between morning and afternoon rush)
+- **Manpower Required:** 4 people
+- **Skills Required:** Inventory management trained
+- **Priority:** P1 (important but flexible timing)
+
+The system stores these task templates and automatically factors them into weekly scheduling. When Ramesh generates next week's roster, the system first blocks out people for these mandatory tasks before assigning customer-facing roles.
+
+**Time Saved:** Instead of mentally juggling operational tasks while scheduling, Ramesh now has them systematically accounted for.
+
+---
+
+#### **Capability 2.2: Task-to-Manpower Calculation**
+
+**Description:**  
+The system calculates total manpower requirements by combining operational task needs with customer service demands, preventing both understaffing (tasks incomplete) and overstaffing (idle employees).
+
+**Real-World Example:**  
+Priya manages a More Megastore in Hyderabad. For Monday 7:00 AM - 12:00 PM, the system calculates:
+
+**Operational Tasks (Monday Morning):**
+- Delivery unloading: 3 people × 2 hours = 6 person-hours (7-9 AM)
+- Fresh produce stocking: 2 people × 2 hours = 4 person-hours (6-8 AM)
+- Floor cleaning (2 rounds): 3 people × 30 min × 2 = 3 person-hours (8 AM, 10 AM)
+- Shelf restocking: 4 people × 2 hours = 8 person-hours (11 AM-1 PM)
+
+**Customer Service Needs (from demand forecasting):**
+- Cashiers: 4 people × 5 hours = 20 person-hours (7 AM-12 PM)
+- Floor assistants: 3 people × 5 hours = 15 person-hours (7 AM-12 PM)
+- Customer service desk: 1 person × 5 hours = 5 person-hours (7 AM-12 PM)
+
+**System's Smart Calculation:**
+Instead of simply adding them (63 person-hours = 12-13 people), the system optimizes:
+
+1. **Deepak** (forklift certified):
+   - 7-9 AM: Delivery unloading
+   - 9 AM-12 PM: Floor assistant duty
+   - Total: 5 hours, skills utilized efficiently
+
+2. **Anjali & Kavita** (fresh food certified):
+   - 6-8 AM: Fresh produce stocking
+   - 8 AM-12 PM: Cashier duty (both are dual-trained)
+   - Total: 6 hours each
+
+3. **Ravi, Suresh, Amit** (general duty staff):
+   - 7-9 AM: Delivery unloading support
+   - 8 AM, 10 AM: Floor cleaning (30 min each)
+   - 9 AM-12 PM: Floor assistant/stocking
+   - Total: 5 hours each
+
+**Final Schedule: 9 people instead of 13** (31% labor cost saving)
+
+The system dashboard shows Priya:
+> "Monday 7-12 PM: 9 staff scheduled  
+> Operational tasks: 21 person-hours (covered)  
+> Customer service: 40 person-hours (covered)  
+> Total cost: ₹12,600 vs budget ₹13,000 ✅"
+
+**Impact:** Tasks don't fall through cracks, and no one stands idle between duties.
+
+---
+
+#### **Capability 2.3: Task Prioritization (P0/P1/P2) with Compliance Monitoring**
+
+**Description:**  
+The system enforces task priority levels. P0 tasks (business-critical) must have assigned staff or the system blocks schedule approval. P1/P2 tasks can be deprioritized if resources are tight.
+
+**Real-World Example:**  
+Vikram manages a Spencer's Retail store in Bangalore. Friday before a long weekend, 3 employees call in sick. He has 6 staff instead of planned 9.
+
+**Original Schedule (9 people):**
+
+**P0 Tasks:**
+- Store opening procedure (1 person, 8-8:30 AM) - Includes cash register setup, alarm disarm
+- Floor cleaning every 2 hours (1 person × 6 rounds)
+- Cash counting & deposit (1 person, 9-10 PM) - Regulatory requirement
+
+**P1 Tasks:**
+- Promotional signage refresh (2 people, 11 AM-1 PM)
+- Inventory cycle count - Aisle 5 (1 person, 3-5 PM)
+
+**P2 Tasks:**
+- Rearrange seasonal display (2 people, 2-4 PM)
+- Stock room organization (1 person, 4-6 PM)
+
+**System Response to 3 Sick Calls:**
+
+Vikram tries to approve the reduced schedule. The system alerts:
+
+> "⚠️ **SCHEDULE VALIDATION FAILED**  
+> P0 tasks without coverage:  
+> 1. Store opening (8 AM) - Keyholder required: Assign Rohan or Meera  
+> 2. Floor cleaning (12 PM round) - No one available  
+> 3. Cash deposit (9 PM) - Manager required: You must cover or delegate  
+>  
+> Cannot approve schedule until P0 tasks are covered."
+
+Vikram adjusts:
+- Assigns Rohan (keyholder) to opening duty
+- Shifts lunch breaks to ensure cleaning coverage at 12 PM
+- Blocks himself for 9-10 PM cash deposit
+
+The system then auto-suggests:
+> "✅ P0 tasks covered. Recommendation: Postpone P1 and P2 tasks to Saturday when Priya and Amit return from sick leave."
+
+Vikram accepts. Schedule is approved. Customer service operates normally, critical tasks completed, optional tasks delayed.
+
+**Compliance Feature:**  
+For food retail stores, the system has built-in regulatory tasks:
+- "Food temperature check every 4 hours" (P0)
+- "Fresh produce rotation" (P0)
+- "Hygiene log completion" (P0)
+
+If these lack coverage, the system prevents schedule approval and escalates to store manager + regional manager emails.
+
+---
+
+#### **Capability 2.4: Task-Specific Skill Requirements & Auto-Matching**
+
+**Description:**  
+Each task can specify required skills/certifications. The system only suggests employees who possess those qualifications, preventing assignment errors that could cause operational failures or safety issues.
+
+**Real-World Example:**  
+Lakshmi manages a DMart grocery store in Chennai with 40 employees. Not everyone can do every task.
+
+**Skill Matrix in System:**
+
+| Employee | Forklift Cert | Fresh Food Handling | Fire Safety | Keyholder | Inventory Scanner |
+|----------|---------------|---------------------|-------------|-----------|-------------------|
+| Karthik  | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Divya    | ❌ | ✅ | ✅ | ❌ | ✅ |
+| Ramesh   | ✅ | ❌ | ✅ | ❌ | ✅ |
+| Sowmya   | ❌ | ✅ | ✅ | ❌ | ❌ |
+| Arjun    | ❌ | ❌ | ✅ | ✅ | ✅ |
+
+**Task Requirements:**
+
+**Delivery Unloading (Monday 7-9 AM):**
+- Required Skills: Forklift certification (mandatory), Inventory scanner (mandatory)
+- Manpower: 2 people
+
+**System Auto-Matching:**  
+When Lakshmi clicks "Auto-schedule delivery task," the system:
+1. Filters employees: Only Karthik and Ramesh qualify (both have forklift + scanner)
+2. Checks availability: Karthik marked unavailable Mondays (college)
+3. **Assigns Ramesh** automatically
+4. **Alerts:** "⚠️ Only 1 qualified person available (need 2). Options:
+   - Schedule training for Arjun (has scanner, needs forklift cert)
+   - Hire temp worker with forklift license
+   - Reschedule delivery to Tuesday when Karthik available"
+
+**Safety Prevention:**  
+Lakshmi once tried manually assigning Sowmya to delivery task. System blocked it:
+> "❌ Cannot assign Sowmya to 'Delivery Unloading'  
+> Missing required certifications:  
+> - Forklift operation (expired 2024-08-15)  
+> - Inventory scanner (never completed)  
+>  
+> Assign qualified staff or remove this task requirement."
+
+This prevents:
+- Safety violations (untrained forklift operation = accident risk)
+- Operational failures (can't use scanner = delivery delays)
+- Compliance fines from labor/safety inspectors
+
+**Expiry Tracking Bonus:**  
+System tracks certification expiry:
+- Karthik's forklift cert expires March 15, 2026
+- System alerts Lakshmi on Feb 1: "🔔 Karthik's forklift certification expires in 45 days. Schedule renewal training or he'll be unavailable for delivery tasks."
+
+---
+
+#### **Capability 2.5: Frequency-Based Scheduling (Every X Hours, Specific Days, Daily)**
+
+**Description:**  
+The system handles complex recurring patterns—tasks that repeat every few hours (cleaning), specific days (delivery on Mon/Wed/Fri), or daily at varying times. It auto-generates assignments across weeks without manual repetition.
+
+**Real-World Example:**  
+Neha manages a Reliance Fresh store in Mumbai with varied task frequencies:
+
+**Task Frequency Matrix:**
+
+| Task | Pattern | System Behavior |
+|------|---------|----------------|
+| **Floor Mopping** | Every 2 hours (8 AM, 10 AM, 12 PM, 2 PM, 4 PM, 6 PM, 8 PM) | Auto-creates 7 daily shifts; rotates staff to prevent one person doing all rounds |
+| **Delivery Reception** | Monday, Wednesday, Friday at 7 AM | Only appears on Mon/Wed/Fri schedules; blocks 2 people for 7-9 AM those days |
+| **Fresh Bakery Stock** | Daily at 5:30 AM | Appears every day; system ensures someone with bakery cert is scheduled early shift |
+| **Weekly Inventory Audit** | Every Saturday 10 AM-2 PM | Appears only on Saturdays; requires 3 people with audit training |
+| **Cash Reconciliation** | Daily at store closing (10 PM) | Appears every day at close; requires manager or senior cashier |
+| **Deep Cleaning** | First Sunday of month, 6 AM-10 AM | Appears once monthly; system sends reminder 2 weeks ahead to arrange extra staff |
+
+**Scenario - Week of January 20-26, 2026:**
+
+When Neha generates the schedule, the system automatically populates:
+
+**Monday Jan 20:**
+- 7:00 AM: Delivery reception (Ramesh, Vikram)
+- 5:30 AM: Bakery stock (Priya - bakery certified)
+- 8 AM, 10 AM, 12 PM... 8 PM: Floor mopping (rotates between Amit, Sunil, Ravi)
+- 10 PM: Cash reconciliation (Neha herself - manager)
+
+**Tuesday Jan 21:**
+- No delivery (not Mon/Wed/Fri)
+- 5:30 AM: Bakery stock (Divya - backup bakery person)
+- 8 AM, 10 AM, 12 PM... 8 PM: Floor mopping (different rotation to prevent fatigue)
+- 10 PM: Cash reconciliation (Senior cashier Lakshmi)
+
+**Wednesday Jan 22:**
+- 7:00 AM: Delivery reception (Ramesh, Deepak)
+- [Rest of daily tasks...]
+
+**Saturday Jan 25:**
+- 10 AM-2 PM: Weekly inventory audit (Karthik, Anjali, Suresh - all audit trained)
+- [Plus all daily tasks...]
+
+**System Intelligence:**  
+- **Fair Distribution:** Amit isn't stuck with all 7 mopping rounds; system rotates among 3 people (2-3 rounds each)
+- **Skill Matching:** Bakery stock only assigned to Priya or Divya (certified), never to others
+- **Conflict Prevention:** Ramesh can't be scheduled for delivery (7 AM) and opening cashier (7 AM) simultaneously
+- **Advance Planning:** System shows Neha on Jan 10: "First Sunday (Feb 2) deep cleaning is in 3 weeks. You'll need 4 extra staff hours. Start planning."
+
+**Time Saved:**  
+Without this, Neha would spend 2 hours manually copying "Floor mopping 8 AM" × 7 times per day × 7 days = 49 entries. System does it in 1 click.
+
+---
+
+#### **Capability 2.6: Store-Specific Task Configuration**
+
+**Description:**  
+Different store formats have different operational needs. The system allows task-based scheduling to be enabled/configured per store, not chain-wide. A boutique can run demand-only scheduling while a hypermarket uses full task management.
+
+**Real-World Example:**  
+Sanjay is the operations head for "ShopSmart" chain with 3 store formats:
+
+**Format 1: ShopSmart Hypermarket (3 locations - Bangalore, Hyderabad, Mumbai)**
+- **Size:** 50,000 sq ft, 200+ employees per store
+- **Operational Complexity:** HIGH
+  - Daily deliveries from 10+ vendors
+  - In-store bakery, fresh produce, meat counter (special handling)
+  - Warehouse with 5000+ SKUs requiring constant restocking
+  - Cleaning crew needed every 2 hours
+  - Forklift operations in warehouse
+
+**Configuration:** **Task-based scheduling ENABLED**
+- 25+ recurring tasks defined
+- Heavy emphasis on operational scheduling
+- Customer service scheduling layered on top
+
+**Format 2: ShopSmart Express (8 locations - various cities)**
+- **Size:** 5,000 sq ft, 15-20 employees per store
+- **Operational Complexity:** MEDIUM
+  - 2-3 deliveries per week
+  - Minimal warehouse (most stock on floor)
+  - Basic cleaning tasks
+
+**Configuration:** **Task-based scheduling PARTIALLY ENABLED**
+- 8 core tasks defined (deliveries, opening/closing, cleaning)
+- Mostly demand-based for customer service
+- Hybrid approach
+
+**Format 3: ShopSmart Fashion (5 locations - metro malls)**
+- **Size:** 3,000 sq ft, 8-12 employees per store
+- **Operational Complexity:** LOW
+  - Weekly deliveries (pre-scheduled by mall)
+  - Minimal stocking (small inventory)
+  - Visual merchandising is main "task" (done ad-hoc)
+
+**Configuration:** **Task-based scheduling DISABLED**
+- Pure demand-based scheduling (foot traffic driven)
+- Staff are mostly customer-facing
+- Operational tasks handled opportunistically during slow periods
+
+**System Dashboard View:**
+
+Sanjay logs into regional portal and sees:
+
+| Store | Format | Task Mode | Active Tasks | Schedule Efficiency |
+|-------|--------|-----------|--------------|-------------------|
+| Bangalore Central | Hypermarket | Full Task-Based | 28 tasks | 85% automated |
+| Hyderabad Gachibowli | Hypermarket | Full Task-Based | 26 tasks | 82% automated |
+| Mumbai Andheri Exp | Express | Hybrid | 8 tasks | 70% automated |
+| Pune Koregaon | Express | Hybrid | 9 tasks | 73% automated |
+| Delhi DLF Mall | Fashion | Demand-Only | 0 tasks | 65% automated |
+| Chennai Express Ave | Fashion | Demand-Only | 0 tasks | 68% automated |
+
+**Local Manager Control:**  
+Ramesh (Bangalore Hypermarket manager) sees his task dashboard:
+- Can add/edit/disable tasks for his store only
+- Cannot change system mode (Head Office controls if task mode is on/off)
+- Can adjust task timing/manpower within guidelines
+
+Priya (Delhi Fashion manager) doesn't even see task management features:
+- Her interface is simpler (demand-based only)
+- Schedules by expected foot traffic and sales forecasts
+- No task definitions needed
+
+**Benefit:**  
+- **Cost Efficiency:** Fashion stores don't pay for complex task features they don't need
+- **Appropriate Complexity:** Each format gets tools matching its operational reality
+- **Single Platform:** One rostering system handles all formats, different configurations
+
+---
+
+#### **Capability 2.7: Integration with Demand Forecasting (Unified Manpower Planning)**
+
+**Description:**  
+The system doesn't treat operational tasks and customer demand as separate silos. It combines both into a unified schedule, optimizing total manpower while ensuring tasks are completed and customers are served.
+
+**Real-World Example:**  
+Anjali manages a BigBazaar in Kolkata. Saturday (peak day) schedule planning:
+
+**Input 1 - Operational Tasks for Saturday:**
+- 6-8 AM: Receiving + stocking fresh produce (4 people)
+- 7-9 AM: Delivery unloading (3 people)
+- 9-11 AM: Promotional display setup (2 people)
+- Throughout day: Floor cleaning every 2 hours (2 people × 15 min per round)
+
+**Input 2 - Demand Forecast for Saturday:**
+The system analyzed:
+- Last 4 Saturdays: avg 2,800 customers, ₹8.5 lakh sales
+- This Saturday: No special event, normal flow expected
+- Peak hours: 11 AM-2 PM (lunch shopping), 6-9 PM (evening families)
+
+**Demand-Based Recommendation:**
+- 6-11 AM: Moderate flow → 6 customer-facing staff (4 cashiers, 2 floor)
+- 11 AM-2 PM: Peak → 12 customer-facing staff (8 cashiers, 4 floor)
+- 2-6 PM: Moderate → 8 customer-facing staff
+- 6-9 PM: Peak → 12 customer-facing staff
+- 9-10 PM: Low → 4 staff (winding down)
+
+**Unified System Output:**
+
+The system creates an integrated schedule:
+
+**6:00-8:00 AM (Store opens at 8 AM):**
+- Operational: 4 people (produce stocking)
+- Total: 4 people
+- Who: Deepak, Priya, Vikram, Sowmya (all fresh food certified)
+
+**7:00-9:00 AM:**
+- Operational: 3 people (delivery) + 2 people cleaning
+- Customer-facing: 6 people (4 cashiers, 2 floor)
+- **Overlap optimization:** Deepak finishes produce at 8 AM → moves to delivery team 8-9 AM
+- **Total: 9 people** (system avoided double-counting Deepak)
+
+**9:00-11:00 AM:**
+- Operational: 2 people (display setup)
+- Customer-facing: 6 people
+- **Overlap:** Ramesh does display setup 9-10 AM, then shifts to floor duty 10-11 AM
+- **Total: 7 people**
+
+**11:00 AM-2:00 PM (Peak):**
+- Operational: Cleaning rounds only (2 people × 15 min = 0.5 effective)
+- Customer-facing: 12 people (heavy demand)
+- **System intelligence:** Schedules cleaning at 11:30 AM and 1:30 PM (avoiding 12-1 PM peak)
+- **Total: 12 people**
+
+**Dashboard View for Anjali:**
+
+> **Saturday Schedule Summary**  
+> Total manpower: 16 unique employees scheduled (not 25+ if tasks and demand counted separately)  
+> Operational tasks: 100% covered ✅  
+> Customer demand: 98% coverage (optimal) ✅  
+> Labor cost: ₹28,400 vs budget ₹30,000 ✅ (5% under)  
+> Efficiency: 18% fewer people than separate task+demand scheduling  
+
+**Scenario - Without Integration (Siloed Approach):**
+
+If Anjali used a system where tasks and demand were separate:
+- Task scheduler says: "Need 8 people for operational tasks Saturday morning"
+- Demand scheduler says: "Need 12 people for customer service Saturday morning"
+- Anjali manually assigns: 8 + 12 = 20 people → Overstaffing, wasted cost
+
+**With Unified System:**
+- System realizes operational staff can transition to customer roles
+- Optimizes overlaps and transitions
+- Result: 16 people do the work of 20 → **20% labor cost reduction**
+
+---
+
+#### **Capability 2.8: Task Completion Tracking & Compliance Reporting**
+
+**Description:**  
+Beyond scheduling tasks, the system tracks actual completion. Employees clock in/out of specific tasks via mobile app. Managers get real-time visibility on what's done vs pending. Compliance reports prove regulatory tasks (hygiene, safety checks) were completed on time.
+
+**Real-World Example:**  
+Karthik manages a More Megastore in Delhi with strict FSSAI (Food Safety) compliance requirements. He must prove all mandatory food safety tasks are completed daily, or face fines during inspections.
+
+**System Setup - P0 Compliance Tasks:**
+
+| Task | Frequency | Assigned | Completion Required |
+|------|-----------|----------|---------------------|
+| Refrigeration temp check | Every 4 hours (7 AM, 11 AM, 3 PM, 7 PM) | Duty manager | Photo + temp log |
+| Fresh produce rotation | Daily 6 AM | Produce staff | Checklist completion |
+| Meat counter cleaning | Daily after close (10 PM) | Meat section staff | Photo verification |
+| Bakery equipment sanitization | Daily 5 AM | Bakery staff | Signature required |
+| Floor hygiene inspection | Every 2 hours | Floor supervisor | Digital checklist |
+
+**Daily Operations - Wednesday:**
+
+**7:00 AM - Temp Check Task:**
+- System sends push notification to duty manager Ramesh: "🔔 Refrigeration temp check due now"
+- Ramesh opens mobile app → "Clock into Task: Refrigeration Temp Check"
+- Takes photo of digital thermometers showing 4°C (dairy), -18°C (frozen)
+- Enters readings into app
+- Clicks "Complete Task" → Timestamp: 7:08 AM ✅
+
+**6:00 AM - Produce Rotation:**
+- Sowmya (produce staff) clocks into "Fresh Produce Rotation" task
+- App shows checklist:
+  - ✅ Remove items expiring today
+  - ✅ Move yesterday's stock to front
+  - ✅ Place new stock in back
+  - ✅ Check for spoilage
+- Completes all items → Clocks out at 6:35 AM ✅
+
+**11:00 AM - Missed Task Alert:**
+- System notices: 11 AM temp check not started
+- Escalation: "⚠️ HIGH PRIORITY: Refrigeration temp check overdue by 15 minutes. Ramesh is scheduled but hasn't clocked in."
+- Sends alert to Ramesh + assistant manager
+- Ramesh was busy with customer complaint → sees alert → immediately does temp check (11:18 AM) ✅
+
+**Manager Dashboard (Real-Time):**
+
+Karthik views his compliance dashboard:
+
+**Wednesday Nov 20, 2025 - Task Completion Status**
+
+| Task | Scheduled | Status | Completed By | Time | Evidence |
+|------|-----------|--------|--------------|------|----------|
+| Bakery sanitization | 5:00 AM | ✅ Complete | Priya | 5:12 AM | Signature |
+| Produce rotation | 6:00 AM | ✅ Complete | Sowmya | 6:35 AM | Checklist |
+| Temp check | 7:00 AM | ✅ Complete | Ramesh | 7:08 AM | 2 photos |
+| Floor inspection | 8:00 AM | ✅ Complete | Vikram | 8:05 AM | Checklist |
+| Floor inspection | 10:00 AM | ✅ Complete | Vikram | 10:02 AM | Checklist |
+| Temp check | 11:00 AM | ⚠️ Late (18 min) | Ramesh | 11:18 AM | 2 photos |
+| Floor inspection | 12:00 PM | 🔄 In Progress | Amit | Started 12:01 PM | - |
+| Temp check | 3:00 PM | ⏳ Upcoming | - | - | - |
+
+**Compliance Reporting:**
+
+Monthly FSSAI audit coming up. Karthik generates report:
+
+> **Food Safety Compliance Report - October 2025**  
+> Store: More Megastore, Connaught Place, Delhi  
+> 
+> **Refrigeration Temp Checks:** 124/124 completed (100%)  
+> - On-time: 118 (95%)  
+> - Late <30 min: 6 (5%)  
+> - Missed: 0 ✅  
+> - Evidence: 248 photos, all temps within safe range  
+> 
+> **Fresh Produce Rotation:** 31/31 completed (100%) ✅  
+> **Meat Counter Cleaning:** 31/31 completed (100%) ✅  
+> **Floor Inspections:** 217/217 completed (100%) ✅  
+> 
+> **Overall Compliance Score: 100%**  
+> **Audit-Ready:** Yes ✅
+
+Inspector visits. Karthik pulls up October 15 logs on tablet:
+- Shows temp check at 7:05 AM with photo evidence
+- Shows produce rotation checklist completed 6:22 AM
+- Inspector is satisfied → No violations, no fines
+
+**Benefit:**
+- **Proof of Compliance:** Digital trail with timestamps, photos, signatures
+- **Real-Time Alerts:** Catch missed tasks before they become violations
+- **Accountability:** Clear record of who did what when
+- **Audit Confidence:** Generate reports in minutes, not days of searching paper logs
+
+---
+
+### Feature 3: Demand-Based Forecasting
+
+#### **Capability 3.1: Historical Sales Data Integration**
 
 **Description:**  
 The system connects to your Point of Sale (POS) system, analyzes past sales patterns, and predicts future customer traffic to recommend optimal staffing levels.
@@ -169,7 +674,7 @@ Vishal adjusts the roster, reducing shifts for part-timers while keeping core FT
 
 ---
 
-#### **Capability 2.2: Seasonal/Event-Based Adjustments**
+#### **Capability 3.2: Seasonal/Event-Based Adjustments**
 
 **Description:**  
 The system accounts for festivals, holidays, sales events, and seasonal patterns to automatically increase or decrease staffing recommendations. It learns from past festival periods.
@@ -204,7 +709,7 @@ The system sends alerts 3 weeks in advance: "⏰ Diwali staffing: You'll need 10
 
 ---
 
-#### **Capability 2.3: Peak Hour Identification**
+#### **Capability 3.3: Peak Hour Identification**
 
 **Description:**  
 The system identifies specific times of day when customer traffic peaks and recommends concentrated staffing during those windows while reducing staff during quiet hours.
@@ -244,7 +749,7 @@ Instead of having 15 staff the entire day (wasteful), Manoj uses split shifts:
 
 ---
 
-#### **Capability 2.4: Recommended Staffing Levels by Role/Store**
+#### **Capability 3.4: Recommended Staffing Levels by Role/Store**
 
 **Description:**  
 System provides specific recommendations not just for total headcount, but for each role type (cashier, floor staff, supervisor) and customizes by individual store characteristics.
@@ -295,9 +800,9 @@ This granular intelligence prevents one-size-fits-all staffing mistakes.
 
 ---
 
-### Feature 3: Labor Cost Management & Budgeting
+### Feature 4: Labor Cost Management & Budgeting
 
-#### **Capability 3.1: Weekly/Monthly Labor Budget Setting per Store**
+#### **Capability 4.1: Weekly/Monthly Labor Budget Setting per Store**
 
 **Description:**  
 Regional and store managers can set target labor budgets for each period. The system tracks spending against these budgets in real-time as schedules are created and approved.
@@ -358,7 +863,7 @@ She can intervene early in Koramangala before month-end overspend.
 
 ---
 
-#### **Capability 3.2: Real-Time Cost Projection as Schedules are Built**
+#### **Capability 4.2: Real-Time Cost Projection as Schedules are Built**
 
 **Description:**  
 As the manager adds or removes shifts in the scheduling interface, the system instantly calculates and displays the cumulative labor cost, showing how each decision impacts the budget.
@@ -425,7 +930,7 @@ The instant feedback prevents Suresh from spending 2 hours building a roster onl
 
 ---
 
-#### **Capability 3.3: Overtime Alerts Before Approval**
+#### **Capability 4.3: Overtime Alerts Before Approval**
 
 **Description:**  
 When an employee's scheduled hours approach or exceed standard work hours (triggering overtime pay at 2x rate), the system alerts the manager and requires explicit approval before finalizing.
@@ -528,7 +1033,7 @@ This visibility helps Reena make strategic hiring decisions.
 
 ---
 
-#### **Capability 3.4: Different Pay Rates for FTE vs Contractors**
+#### **Capability 4.4: Different Pay Rates for FTE vs Contractors**
 
 **Description:**  
 The system maintains separate pay rate structures for full-time employees, part-time contractors, temporary staff, and interns. It automatically applies the correct rate when calculating labor costs for each employee type.
@@ -612,7 +1117,7 @@ This multi-tier pricing allows Vikram to:
 
 ---
 
-#### **Capability 3.5: Labor % of Revenue Tracking**
+#### **Capability 4.5: Labor % of Revenue Tracking**
 
 **Description:**  
 The system integrates with POS/sales data to calculate labor cost as a percentage of revenue. This key retail metric helps managers understand staffing efficiency and compare performance across stores and time periods.
@@ -714,9 +1219,9 @@ This metric helps identify:
 
 ---
 
-### Feature 4: Compliance Engine
+### Feature 5: Compliance Engine
 
-#### **Capability 4.1: Maximum Hours Enforcement (Daily/Weekly)**
+#### **Capability 5.1: Maximum Hours Enforcement (Daily/Weekly)**
 
 **Description:**  
 The system automatically enforces legal limits on working hours per day and per week as mandated by Indian labor laws (Shops and Establishments Act, Factories Act). It prevents managers from creating schedules that violate these limits.
@@ -811,7 +1316,7 @@ This prevents potential ₹25,000+ fines and legal notices.
 
 ---
 
-#### **Capability 4.2: Minimum Rest Period Between Shifts**
+#### **Capability 5.2: Minimum Rest Period Between Shifts**
 
 **Description:**  
 Indian labor laws require minimum rest periods between consecutive shifts (typically 10-12 hours). The system prevents "clopening" (closing one night, opening next morning) which violates these rules and leads to employee fatigue.
@@ -910,7 +1415,7 @@ Total: ₹6,200
 
 ---
 
-#### **Capability 4.3: Break Requirements**
+#### **Capability 5.3: Break Requirements**
 
 **Description:**  
 Automatically calculates and enforces mandatory break periods based on shift length. Indian law typically requires 30-minute break after 5 hours, 1-hour break for 8+ hour shifts. System ensures breaks are scheduled and tracked.
@@ -1076,7 +1581,7 @@ This visibility lets Ramesh coach employees who skip breaks (often trying to be 
 
 ---
 
-#### **Capability 4.4: Minor Labor Restrictions (if applicable)**
+#### **Capability 5.4: Minor Labor Restrictions (if applicable)**
 
 **Description:**  
 For retail chains that employ workers aged 14-18 (legal in India with restrictions), the system enforces special rules: limited working hours, prohibited night shifts, mandatory education time, and restricted hazardous tasks.
@@ -1270,7 +1775,7 @@ This automation prevents Sunita from accidentally violating complex adolescent l
 
 ---
 
-#### **Capability 4.5: Contract Term Limits for Part-Time Workers**
+#### **Capability 5.5: Contract Term Limits for Part-Time Workers**
 
 **Description:**  
 In India, continuous employment of contractors beyond certain periods (typically 240 days in a year) may trigger permanent employment status under Industrial Disputes Act. System tracks cumulative days worked and alerts when approaching this threshold.
@@ -1503,7 +2008,7 @@ This detailed tracking protects the company from inadvertent permanency claims t
 
 ---
 
-#### **Capability 4.6: Audit Trail for Compliance Reporting**
+#### **Capability 5.6: Audit Trail for Compliance Reporting**
 
 **Description:**  
 System maintains detailed, tamper-proof logs of all scheduling decisions, changes, approvals, and compliance checks. Essential for labor inspector visits, legal disputes, and internal audits.
@@ -1824,9 +2329,9 @@ This comprehensive audit trail is worth its weight in gold during inspections an
 
 ---
 
-### Feature 5: Mobile App (Employee & Manager)
+### Feature 6: Mobile App (Employee & Manager)
 
-#### **Capability 5.1: View Schedules (Real-Time Sync)**
+#### **Capability 6.1: View Schedules (Real-Time Sync)**
 
 **Description:**  
 Employees can view their current and upcoming schedules anytime via mobile app. Changes made by managers sync instantly, ensuring everyone always has the latest information.
@@ -2036,7 +2541,7 @@ This real-time visibility eliminates the constant "What's my schedule?" calls to
 
 ---
 
-#### **Capability 5.2: Clock In/Out with GPS Verification**
+#### **Capability 6.2: Clock In/Out with GPS Verification**
 
 **Description:**  
 Employees use the mobile app to clock in and out of shifts. GPS verification ensures they're physically at the store location, preventing time theft and "buddy punching" (someone else clocking in for you).
@@ -2395,7 +2900,7 @@ This GPS-verified clock-in system has reduced time theft by 85% and eliminated b
 
 ---
 
-#### **Capability 5.3: Request Time Off**
+#### **Capability 6.3: Request Time Off**
 
 **Description:**  
 Employees can submit leave requests (vacation, sick leave, personal days) directly through the mobile app. Managers receive instant notifications and can approve/deny with one tap. Leave balances are automatically tracked.
@@ -2808,7 +3313,7 @@ This streamlined leave system reduced manager workload by 70% and improved emplo
 
 ---
 
-#### **Capability 5.4: Shift Swap Initiation**
+#### **Capability 6.4: Shift Swap Initiation**
 
 **Description:**  
 Employees can propose shift swaps with colleagues directly through the app. The system ensures only qualified, available employees are offered swaps, and requires manager approval before finalizing.
@@ -3219,7 +3724,7 @@ Shift swapping has increased schedule flexibility by 300% while reducing unautho
 
 ---
 
-#### **Capability 5.5: Push Notifications for Changes**
+#### **Capability 6.5: Push Notifications for Changes**
 
 **Description:**  
 Employees receive instant mobile notifications for any schedule changes, shift assignments, swap approvals, important announcements, and reminders. Ensures everyone stays informed in real-time.
@@ -3743,9 +4248,9 @@ This comprehensive notification system has reduced miscommunication by 90%, impr
 
 ---
 
-### Feature 6: Employee Self-Service Portal
+### Feature 7: Employee Self-Service Portal
 
-#### **Capability 6.1: Set Recurring Availability Preferences**
+#### **Capability 7.1: Set Recurring Availability Preferences**
 
 **Description:**  
 Employees can specify their general availability preferences (days of week, times of day, recurring patterns) that the scheduling system automatically respects when creating rosters. This ensures work-life balance and reduces conflicts.
@@ -4014,7 +4519,7 @@ This availability system has reduced scheduling conflicts by 80%, improved emplo
 
 ---
 
-#### **Capability 6.2: Submit Availability Blackouts**
+#### **Capability 7.2: Submit Availability Blackouts**
 
 **Description:**  
 Employees can mark specific dates or periods when they are completely unavailable due to planned events (weddings, travel, medical appointments, etc.). System automatically blocks them from being scheduled during these times.
@@ -4420,7 +4925,7 @@ Blackout system has reduced "call in sick" incidents by 70% (people now plan ahe
 
 ---
 
-#### **Capability 6.3: View Historical Timesheets**
+#### **Capability 7.3: View Historical Timesheets**
 
 **Description:**  
 Employees can access their complete timesheet history showing all clock-ins, clock-outs, breaks, overtime, and total hours worked. Essential for verifying payroll, tracking hours, and resolving disputes.
@@ -4841,7 +5346,7 @@ This historical timesheet system has reduced payroll disputes by 85%, improved e
 
 ---
 
-#### **Capability 6.4: Download Pay Stubs (if integrated)**
+#### **Capability 7.4: Download Pay Stubs (if integrated)**
 
 **Description:**  
 When the rostering system is integrated with payroll, employees can download their monthly pay stubs showing salary breakdowns, deductions, taxes, and net pay. Provides transparency and easy access to financial records.
@@ -5127,7 +5632,7 @@ This integrated pay stub system reduced HR queries about salary by 70%, improved
 
 ---
 
-#### **Capability 6.5: Request Shift Preferences**
+#### **Capability 7.5: Request Shift Preferences**
 
 **Description:**  
 Employees can indicate their general shift preferences (morning, evening, night, weekends, etc.) to help managers create schedules that align with work-life balance needs while meeting business requirements.
@@ -5445,7 +5950,7 @@ This preference system improved employee satisfaction with schedules by 45%, red
 
 ---
 
-#### **Capability 6.6: Update Personal Details**
+#### **Capability 7.6: Update Personal Details**
 
 **Description:**  
 Employees can update their personal information (contact details, address, emergency contacts, bank account) directly through the self-service portal, reducing HR administrative burden and ensuring information is always current.
@@ -5899,11 +6404,11 @@ This self-service update system reduced HR administrative workload by 75%, impro
 
 ---
 
-### Feature 7: Time & Attendance Tracking
+### Feature 9: Time & Attendance Tracking
 
-*(Note: Many capabilities already covered in Mobile App Feature 5. This section covers additional web/manager-facing capabilities.)*
+*(Note: Many capabilities already covered in Mobile App Feature 6. This section covers additional web/manager-facing capabilities.)*
 
-#### **Capability 7.1: Exception Flagging (Late, No-Show, Early Departure)**
+#### **Capability 9.1: Exception Flagging (Late, No-Show, Early Departure)**
 
 **Description:**  
 System automatically detects and flags attendance exceptions - employees arriving late, not showing up, leaving early, or taking extended breaks. Helps managers identify patterns and take corrective action.
@@ -6162,7 +6667,7 @@ This exception tracking reduced unauthorized absences by 45%, improved overall p
 
 ---
 
-#### **Capability 7.2: Multiple Clock-In Methods (Mobile GPS, Kiosk, Web)**
+#### **Capability 9.2: Multiple Clock-In Methods (Mobile GPS, Kiosk, Web)**
 
 **Description:**  
 Employees can clock in and out using multiple methods - mobile app with GPS, dedicated kiosk at store entrance, or web browser. Provides flexibility while maintaining accuracy and preventing time theft.
@@ -6458,7 +6963,7 @@ This multi-method system provides 99.7% uptime, accommodates all employee situat
 
 ---
 
-#### **Capability 7.3: Timesheet Editing with Approval Chain**
+#### **Capability 9.3: Timesheet Editing with Approval Chain**
 
 **Description:**  
 Managers can edit timesheets when corrections are needed (forgotten clock-out, system errors, etc.), but all edits require justification and create an audit trail. Some edits may require upper management approval.
@@ -6831,7 +7336,7 @@ This timesheet editing system maintains accuracy while providing necessary flexi
 
 ---
 
-#### **Capability 7.4: Break Tracking**
+#### **Capability 9.4: Break Tracking**
 
 **Description:**  
 System tracks all employee breaks ensuring compliance with labor laws (mandatory break durations, timing, and frequency). Prevents employees from skipping breaks or taking excessively long breaks.
@@ -7243,11 +7748,11 @@ This comprehensive break tracking ensures 95%+ compliance with labor laws, reduc
 
 ---
 
-### Feature 8: Leave Management System
+### Feature 10: Leave Management System
 
 *(Note: Basic leave request/approval covered in Mobile App. This covers advanced leave management capabilities.)*
 
-#### **Capability 8.1: Approval Workflows with Delegation**
+#### **Capability 10.1: Approval Workflows with Delegation**
 
 **Description:**  
 Leave requests follow configurable approval workflows with multi-level approvals, delegation when managers are unavailable, and auto-escalation if not reviewed within SLA timeframes.
@@ -7510,7 +8015,7 @@ This approval workflow system reduced approval delays by 60%, improved employee 
 
 ---
 
-#### **Capability 8.2: Auto-Update Rosters When Approved**
+#### **Capability 10.2: Auto-Update Rosters When Approved**
 
 **Description:**  
 When leave is approved, the system automatically removes the employee from all scheduled shifts during the leave period, marks them as "on leave" in the calendar, and notifies relevant stakeholders to arrange coverage.
@@ -7808,7 +8313,7 @@ This auto-update system reduced manager administrative time by 80%, eliminated s
 
 ---
 
-#### **Capability 8.3: Blackout Period Enforcement**
+#### **Capability 10.3: Blackout Period Enforcement**
 
 **Description:**  
 Managers can define blackout periods (festival sales, inventory periods, year-end) during which leave requests are automatically blocked or require special approval. Protects business-critical operations.
@@ -8213,7 +8718,7 @@ This blackout enforcement ensured 97%+ attendance during critical periods, incre
 
 ---
 
-#### **Capability 8.4: Accrual Calculations**
+#### **Capability 10.4: Accrual Calculations**
 
 **Description:**  
 System automatically calculates leave accrual based on company policy (monthly, quarterly, annual), tracks pro-rated leaves for new joiners and leavers, and handles complex accrual rules including carry-forwards and encashment.
@@ -8566,9 +9071,9 @@ This accrual system eliminated manual calculation errors by 100%, ensured fair p
 
 ---
 
-#### **Capability 8.5: Auto-Update Rosters When Approved** 
+#### **Capability 10.5: Auto-Update Rosters When Approved** 
 
-*(Already covered in 8.2, this would be duplication. Skipping to avoid redundancy.)*
+*(Already covered in 10.2, this would be duplication. Skipping to avoid redundancy.)*
 
 ---
 
@@ -8585,9 +9090,9 @@ This accrual system eliminated manual calculation errors by 100%, ensured fair p
 
 ---
 
-### Feature 9: System Integrations
+### Feature 11: System Integrations
 
-#### **Capability 9.1: Payroll System Integration (Timesheets, Rates, Deductions)**
+#### **Capability 11.1: Payroll System Integration (Timesheets, Rates, Deductions)**
 
 **Description:**  
 Seamless bi-directional integration with payroll systems to automatically sync approved timesheets, pay rates, overtime hours, deductions, and leave balances. Eliminates manual data entry and ensures accurate salary processing.

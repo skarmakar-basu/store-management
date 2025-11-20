@@ -18,8 +18,22 @@ AI-driven scheduling engine that creates conflict-free rosters based on employee
 | Conflict detection | Catches scheduling errors before publishing. Example: Alerts manager if Deepa is scheduled 9 AM-6 PM at Indiranagar AND 5 PM-10 PM at Koramangala same day |
 | Template support | Reuses proven schedule patterns. Example: Save "Diwali Sale" template (extra staff 10 AM-9 PM) and apply it next year with one click |
 
+### Task & Activity-Based Scheduling
+Calculates manpower requirements based on operational tasks (deliveries, stocking, cleaning) alongside customer service needs. Critical for grocery/supermarket formats; configurable per store type.
+
+| Key Capability | Key Capability Description |
+|----------------|----------------------------|
+| Define recurring operational tasks | Set up repeating operational activities. Example: Create task "Delivery unloading Mon/Wed/Fri 7-9 AM, needs 3 people with forklift cert" - system ensures these are staffed every week |
+| Task-to-manpower calculation | Optimize total staff across tasks and customers. Example: System calculates delivery (3 people) + stocking (2 people) + cashiers (4 people) = 9 total, but optimizes to 6 by reusing staff across tasks |
+| Task prioritization (P0/P1/P2) | Critical tasks get priority staffing. Example: P0 task "Floor cleaning every 2 hours" always staffed; P2 task "Storage audit" postponed if short-staffed during Diwali rush |
+| Task-specific skill requirements | Match qualified staff to tasks. Example: Only Ramesh (forklift certified) assigned to warehouse delivery unloading - system blocks unqualified staff from this task |
+| Frequency-based scheduling | Tasks repeat automatically on schedule. Example: "Freezer temp check every 6 hours" auto-appears in schedule at 9 AM, 3 PM, 9 PM daily without manual entry |
+| Store-specific task configuration | Different stores have different tasks. Example: Big Bazaar has daily deliveries and bakery tasks; FabIndia boutique only has weekly inventory and window display - each configured separately |
+| Integration with demand forecasting | Tasks + customer demand = total manpower. Example: Monday 8 AM needs 3 for delivery task + 4 for customer service = 7 total staff shown in unified schedule |
+| Task completion tracking | Monitor compliance with operational tasks. Example: System tracks "Freezer check completed 9:05 AM by Lakshmi ✅" and alerts if missed - audit trail for food safety inspection |
+
 ### Demand-Based Forecasting
-Aligns staffing levels with predicted foot traffic and sales to optimize labor deployment
+Aligns staffing levels with predicted foot traffic and sales for customer-facing roles to optimize labor deployment
 
 | Key Capability | Key Capability Description |
 |----------------|----------------------------|
@@ -27,6 +41,7 @@ Aligns staffing levels with predicted foot traffic and sales to optimize labor d
 | Seasonal/event-based adjustments | Accounts for festivals and events. Example: Automatically increases staff by 50% for Diwali week, Onam, and Republic Day sales based on last year's data |
 | Peak hour identification | Spots busy time periods. Example: Identifies 6 PM-9 PM as rush hour at Big Bazaar Pune (post-office crowd) - recommends 5 extra cashiers during this window |
 | Recommended staffing levels | Suggests optimal team size by role. Example: Recommends 8 sales floor staff + 4 cashiers + 1 supervisor for Saturday at Reliance Trends Koramangala based on expected footfall |
+| Integration with task-based scheduling | Works together with operational tasks for unified planning. Example: System combines task needs (delivery 3 people) + customer service needs (4 cashiers) = optimized 6 people schedule |
 
 ### Labor Cost Management & Budgeting
 Real-time tracking of labor spend against budgets with proactive alerts to prevent overruns
@@ -189,24 +204,24 @@ Tools to improve workforce satisfaction, motivation, and retention
 
 ## Summary Statistics
 
-- **Total Features:** 15
-  - P0 (Must Have): 5 features
+- **Total Features:** 16
+  - P0 (Must Have): 6 features
   - P1 (High Priority): 5 features
   - P2 (Nice to Have): 5 features
-- **Total Capabilities:** 78 capabilities documented
-- **Average Capabilities per Feature:** 5.2
+- **Total Capabilities:** 87 capabilities documented
+- **Average Capabilities per Feature:** 5.4
 
 ---
 
 ## Priority Breakdown
 
-### P0 - Must Have (Features 1-5)
-Critical features required for basic rostering functionality and legal compliance.
+### P0 - Must Have (Features 1-6)
+Critical features required for basic rostering functionality, operational task management, and legal compliance. Task-based scheduling is P0 for grocery/supermarket/hypermarket formats but can be disabled for boutique/fashion stores.
 
-### P1 - High Priority (Features 6-10)
+### P1 - High Priority (Features 7-11)
 Important features that significantly improve efficiency and user experience.
 
-### P2 - Nice to Have (Features 11-15)
+### P2 - Nice to Have (Features 12-16)
 Enhanced features that provide incremental value and competitive advantage.
 
 ---

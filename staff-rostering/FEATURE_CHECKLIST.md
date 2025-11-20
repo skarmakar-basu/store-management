@@ -38,8 +38,17 @@ Use this during vendor demos to quickly score each solution.
 | ↳ GPS clock in/out | ⬜ | ⬜ | ⬜ | |
 | ↳ Offline schedule viewing | ⬜ | ⬜ | ⬜ | |
 | ↳ Push notifications | ⬜ | ⬜ | ⬜ | |
+| **Real-Time Roster Intelligence** | ⬜ | ⬜ | ⬜ | |
+| ↳ Absence detection & alerts | ⬜ | ⬜ | ⬜ | |
+| ↳ Gap analysis | ⬜ | ⬜ | ⬜ | |
+| ↳ Task redistribution recommendations | ⬜ | ⬜ | ⬜ | |
+| ↳ Replacement staff recommendations | ⬜ | ⬜ | ⬜ | |
+| ↳ Demand surge detection | ⬜ | ⬜ | ⬜ | |
+| ↳ Surge response recommendations | ⬜ | ⬜ | ⬜ | |
+| ↳ Forecasted gap alerts | ⬜ | ⬜ | ⬜ | |
+| ↳ One-click approval actions | ⬜ | ⬜ | ⬜ | |
 
-**P0 Score:** ___/31 | ___/31 | ___/31
+**P0 Score:** ___/40 | ___/40 | ___/40
 
 ---
 
@@ -160,15 +169,22 @@ Use this during vendor demos to quickly score each solution.
 12. "What does the push notification look like for a schedule change?"
 13. "How accurate is the GPS geofencing for clock-ins?"
 
+### Real-Time Roster Intelligence
+14. "Show us what happens when an employee doesn't clock in at their scheduled time. How quickly does the manager get alerted?"
+15. "An employee just called in sick 10 minutes into their shift with 3 critical tasks assigned. Show us the recommendations the system provides."
+16. "Can you simulate a demand surge scenario where foot traffic suddenly increases 40%? What actions does the system recommend?"
+17. "How does the system identify which replacement employees to recommend? What criteria does it use?"
+18. "Show us a forecasted gap alert—like when multiple employees request the same day off."
+
 ### Integrations
-14. "Walk us through the payroll integration setup with [YOUR SYSTEM]."
-15. "Can we import sales data from [YOUR POS] for forecasting?"
-16. "What's your API rate limit, and what happens if we exceed it?"
+19. "Walk us through the payroll integration setup with [YOUR SYSTEM]."
+20. "Can we import sales data from [YOUR POS] for forecasting?"
+21. "What's your API rate limit, and what happens if we exceed it?"
 
 ### Cost Management
-17. "Show us the labor cost dashboard during schedule creation."
-18. "Can we set different budgets for weekdays vs weekends?"
-19. "How do overtime alerts work—real-time or batch?"
+22. "Show us the labor cost dashboard during schedule creation."
+23. "Can we set different budgets for weekdays vs weekends?"
+24. "How do overtime alerts work—real-time or batch?"
 
 ### Support
 20. "What's included in your standard support tier?"
@@ -184,6 +200,8 @@ Use this during vendor demos to quickly score each solution.
 - ❌ Task-based scheduling requires manual workarounds or spreadsheets
 - ❌ Cannot configure task-based mode per store (all-or-nothing approach)
 - ❌ Task requirements and demand forecasting operate in silos (no integration)
+- ❌ No real-time gap detection or automated recommendations for absences/surges
+- ❌ Manager must manually identify coverage gaps and replacement staff
 - ❌ Mobile app is just a web wrapper
 - ❌ No compliance module for your region
 - ❌ Payroll integration requires CSV uploads

@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-**For stakeholders:** Research identifies 16 critical features for retail rostering spanning scheduling automation, operational task management, compliance, and workforce engagement. Top priorities (P0/P1) focus on automated scheduling, task-based workforce planning (critical for grocery/supermarket formats), labor cost control, and mobile access—features that deliver 70%+ of expected ROI while addressing our mixed workforce (FTE + contractors), multi-store complexity, and store format variations.
+**For stakeholders:** Research identifies 17 critical features for retail rostering spanning scheduling automation, operational task management, compliance, and workforce engagement. Top priorities (P0/P1) focus on automated scheduling, task-based workforce planning (critical for grocery/supermarket formats), labor cost control, mobile access, and real-time roster intelligence—features that deliver 70%+ of expected ROI while addressing our mixed workforce (FTE + contractors), multi-store complexity, and store format variations.
 
 ---
 
@@ -82,11 +82,24 @@
   - Push notifications for changes
   - Offline mode for schedule viewing
 
+#### 7. **Real-Time Roster Intelligence & Recommendations**
+- **Description:** Proactive gap detection, alerts, and actionable recommendations for roster disruptions and demand surges
+- **Why Critical:** Prevents operational disruptions; enables rapid response to unexpected situations (absences, no-shows, demand spikes); reduces manager decision-making time during crises
+- **Key Capabilities:**
+  - Absence detection (automatically detects when employees don't clock in at scheduled time; alerts manager within minutes)
+  - Gap analysis (identifies coverage gaps in real-time: no-show, late arrival, early departure)
+  - Task redistribution recommendations (suggests how to redistribute absent employee's tasks among available staff based on skills and current workload)
+  - Replacement recommendations (recommends eligible employees to call in: available, qualified, within contract hours)
+  - Demand surge detection (monitors real-time foot traffic/sales data; detects sudden increases above forecast)
+  - Surge response recommendations (suggests immediate actions: call in backup staff, extend current shifts, redistribute tasks when demand spikes)
+  - Forecasted gap alerts (predicts potential gaps, e.g., multiple leave requests for same day, and recommends preventive actions)
+  - One-click actions (manager can approve recommendations with single click: send shift offer, redistribute tasks)
+
 ---
 
 ### **P1 - High Priority** (Competitive Differentiation)
 
-#### 7. **Employee Self-Service Portal**
+#### 8. **Employee Self-Service Portal**
 - **Description:** Web/mobile interface for employees to manage their work life
 - **Key Capabilities:**
   - Set recurring availability preferences
@@ -96,7 +109,7 @@
   - Request shift preferences
   - Update personal details
 
-#### 8. **Shift Swapping & Marketplace**
+#### 9. **Shift Swapping & Marketplace**
 - **Description:** Peer-to-peer shift trading with approval workflows
 - **Key Capabilities:**
   - Propose swaps to eligible colleagues
@@ -105,7 +118,7 @@
   - Manager approval gateway
   - Automated roster updates post-approval
 
-#### 9. **Time & Attendance Tracking**
+#### 10. **Time & Attendance Tracking**
 - **Description:** Accurate capture of actual hours worked
 - **Key Capabilities:**
   - Multiple clock-in methods (mobile GPS, kiosk, web)
@@ -114,7 +127,7 @@
   - Timesheet editing with approval chain
   - Exception flagging (late, no-show, early departure)
 
-#### 10. **Leave Management System**
+#### 11. **Leave Management System**
 - **Description:** Unified platform for all leave requests (vacation, sick, personal)
 - **Key Capabilities:**
   - Balance tracking per leave type
@@ -123,7 +136,7 @@
   - Blackout period enforcement (e.g., holiday season)
   - Accrual calculations
 
-#### 11. **System Integrations**
+#### 12. **System Integrations**
 - **Description:** Bi-directional data sync with existing systems
 - **Why Critical:** Eliminates duplicate data entry; ensures single source of truth
 - **Key Integrations:**
@@ -140,7 +153,7 @@
 
 ### **P2 - Nice to Have** (Incremental Value)
 
-#### 12. **Real-Time Notifications & Communication**
+#### 13. **Real-Time Notifications & Communication**
 - Push notifications, SMS, email for:
   - Schedule published/changed
   - Shift reminders (2 hours before)
@@ -148,26 +161,26 @@
   - Manager broadcasts
 - In-app messaging (manager ↔ staff)
 
-#### 13. **Advanced Analytics & Reporting**
+#### 14. **Advanced Analytics & Reporting**
 - Pre-built reports: labor cost by store/period, attendance trends, overtime analysis
 - Custom report builder
 - Interactive dashboards with drill-downs
 - Export to PDF/Excel
 - Scheduled report delivery
 
-#### 14. **Employee Skill & Certification Tracking**
+#### 15. **Employee Skill & Certification Tracking**
 - Maintain skills matrix (cashier, forklift, keyholder, etc.)
 - Certification expiry tracking with renewal alerts
 - Auto-restrict scheduling if cert expired
 - Training history integration
 
-#### 15. **Multi-Location Management**
+#### 16. **Multi-Location Management**
 - Store hierarchy and groupings
 - Cross-store shift visibility (for staff working multiple locations)
 - Aggregate reporting across locations
 - Location-specific policies (different state laws)
 
-#### 16. **Employee Engagement Features**
+#### 17. **Employee Engagement Features**
 - Shift preference ranking
 - Work-life balance scoring
 - Feedback/survey tools
@@ -192,6 +205,7 @@
 | Labor Cost Management | 100 | 3 | 100% | 1.5 | **200** | P0 |
 | Compliance Engine | 100 | 3 | 80% | 2 | **120** | P0 |
 | Mobile App | 100 | 2 | 100% | 3 | **67** | P0 |
+| Real-Time Roster Intelligence | 100 | 3 | 80% | 2 | **120** | P0 |
 | Self-Service Portal | 100 | 1 | 100% | 1.5 | **67** | P1 |
 | Shift Swapping | 90 | 1 | 100% | 1 | **90** | P1 |
 | Time & Attendance | 100 | 2 | 80% | 2 | **80** | P1 |
@@ -217,6 +231,7 @@ When assessing solutions, score each vendor on:
 - [ ] P0 feature completeness (0-5 scale per feature)
 - [ ] Task-based scheduling capability (configurable per store type)
 - [ ] Integration between task-based and demand forecasting (unified engine)
+- [ ] Real-time roster intelligence (gap detection, recommendations, one-click actions)
 - [ ] Integration capabilities with your existing tech stack
 - [ ] Mobile app quality (user ratings, offline support)
 - [ ] API robustness (documentation, rate limits, webhooks)
@@ -269,6 +284,7 @@ When assessing solutions, score each vendor on:
 - **Satisfaction:** Manager NPS >40, Employee NPS >30
 - **Operational:** Time-to-fill open shifts <24 hours
 - **Task Completion:** 98%+ P0 operational tasks completed on time (for stores using task-based mode)
+- **Response Time:** Average time to resolve roster gaps <15 minutes (from alert to action)
 
 ---
 

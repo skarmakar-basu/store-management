@@ -8,10 +8,10 @@
 
 ## 📋 Quick Summary
 
-Research completed on rostering solution requirements for retail chain with mixed workforce (full-time + part-time contractors) and varying store formats. Identified **16 critical features** across 3 priority tiers.
+Research completed on rostering solution requirements for retail chain with mixed workforce (full-time + part-time contractors) and varying store formats. Identified **17 critical features** across 3 priority tiers.
 
 **Key Findings:**
-- **6 P0 (must-have) features** are deal-breakers: automated scheduling, task-based scheduling (format-dependent), demand forecasting, labor cost management, compliance engine, and mobile app
+- **7 P0 (must-have) features** are deal-breakers: automated scheduling, task-based scheduling (format-dependent), demand forecasting, labor cost management, compliance engine, mobile app, and real-time roster intelligence
 - **5 P1 (high-priority) features** provide competitive advantage and ROI
 - **5 P2 (nice-to-have) features** add incremental value
 - Task-based scheduling is critical for operational formats (grocery/supermarket) but optional for boutique/fashion stores
@@ -29,7 +29,7 @@ Research completed on rostering solution requirements for retail chain with mixe
 
 ---
 
-## 🎯 Top 6 Must-Have Features (P0)
+## 🎯 Top 7 Must-Have Features (P0)
 
 ### 1. **Automated Schedule Generation**
 AI-driven scheduling that eliminates 80% of manual planning time by handling availability, skills, and business constraints automatically.
@@ -49,6 +49,9 @@ Automated enforcement of labor laws (max hours, rest periods, breaks) with audit
 ### 6. **Mobile App**  
 Native iOS/Android apps for schedule viewing, clock in/out (GPS verified), time-off requests, and shift swapping—meets modern workforce expectations.
 
+### 7. **Real-Time Roster Intelligence & Recommendations**  
+Proactive gap detection and actionable recommendations for roster disruptions (absences, no-shows, demand surges). Enables rapid response to unexpected situations with automated suggestions for task redistribution and replacement staff. Reduces manager crisis decision-making time from minutes to seconds.
+
 ---
 
 ## 💰 Expected Business Impact
@@ -62,6 +65,7 @@ Native iOS/Android apps for schedule viewing, clock in/out (GPS verified), time-
 | **Employee Adoption** | 90%+ using mobile app weekly |
 | **Manager Satisfaction** | NPS >40 |
 | **Operational Speed** | Fill open shifts in <24 hours |
+| **Gap Resolution** | Average time to resolve roster gaps <15 minutes |
 
 ---
 
@@ -131,22 +135,25 @@ During demos, validate these critical requirements:
 2. **"How does your system integrate task requirements with demand-based customer service staffing? Can we see a unified schedule?"**  
    *(Tests integration between task-based and demand forecasting)*
 
-3. **"Can we configure task-based mode for some stores (like supermarkets) but disable it for others (like boutiques)?"**  
+3. **"Show us what happens when an employee doesn't clock in at their scheduled time. How quickly does the manager get alerted and what recommendations does the system provide?"**  
+   *(Tests real-time roster intelligence and gap detection)*
+
+4. **"Can we configure task-based mode for some stores (like supermarkets) but disable it for others (like boutiques)?"**  
    *(Tests store-specific configurability)*
 
-4. **"Can you enforce part-time contractors can't exceed 20 hours/week while FTE can work 40?"**  
+5. **"Can you enforce part-time contractors can't exceed 20 hours/week while FTE can work 40?"**  
    *(Tests contract hour differentiation)*
 
-5. **"Walk us through the payroll integration with [YOUR SYSTEM]—how do approved timesheets sync?"**  
+6. **"Walk us through the payroll integration with [YOUR SYSTEM]—how do approved timesheets sync?"**  
    *(Tests integration maturity)*
 
-6. **"Show us what happens when a manager tries to schedule someone 10 days straight."**  
+7. **"Show us what happens when a manager tries to schedule someone 10 days straight."**  
    *(Tests compliance engine)*
 
-7. **"Can employees view their schedule without internet on the mobile app?"**  
+8. **"Can employees view their schedule without internet on the mobile app?"**  
    *(Tests offline functionality)*
 
-8. **"How do you handle different state labor laws across our locations?"**  
+9. **"How do you handle different state labor laws across our locations?"**  
    *(Tests multi-jurisdiction compliance)*
 
 ---

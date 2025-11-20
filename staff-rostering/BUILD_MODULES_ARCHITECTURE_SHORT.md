@@ -196,7 +196,34 @@
 
 ---
 
-### **Module 7: Leave Management System**
+### **Module 7: Real-Time Roster Intelligence & Recommendations**
+**Description:** Proactive gap detection, alerts, and actionable recommendations for roster disruptions and demand surges
+
+**Capabilities Delivered:**
+
+| Capability | Description |
+|------------|-------------|
+| Absence detection | Automatically detects when employees don't clock in at scheduled time. System monitors clock-in events and alerts manager within minutes if scheduled employee hasn't checked in (e.g., "Ramesh scheduled 9 AM - no clock-in at 9:15 AM") |
+| Gap analysis | Identifies coverage gaps in real-time (no-show, late arrival, early departure). Analyzes current roster state vs scheduled state to detect missing coverage (e.g., "2 cashiers scheduled, 1 absent - coverage gap detected") |
+| Task redistribution recommendations | Suggests how to redistribute absent employee's tasks among available staff. Analyzes skills, current workload, and task requirements to recommend optimal redistribution (e.g., "Ramesh's delivery unloading task can be covered by Suresh (available, forklift certified)") |
+| Replacement recommendations | Recommends eligible employees to call in (available, qualified, within contract hours). ML-based matching considering availability, skills, location proximity, and contract limits (e.g., "Recommended: Anjali (95% match - available, qualified, 1 hour away)") |
+| Demand surge detection | Monitors real-time foot traffic/sales data and detects sudden increases above forecast. Integrates with POS systems to identify unexpected demand spikes (e.g., "2 PM footfall 50% above forecast - surge detected") |
+| Surge response recommendations | Suggests immediate actions when demand spikes (call in backup staff, extend current shifts, redistribute tasks). Provides actionable options with cost/time impact (e.g., "Option 1: Extend Priya's shift by 2 hours - cost ₹800" OR "Option 2: Call in Anjali - cost ₹600, 1 hour away") |
+| Forecasted gap alerts | Predicts potential gaps before they occur (e.g., multiple leave requests for same day). Uses historical patterns and current leave requests to warn managers proactively (e.g., "Warning: 3 employees requested leave on Dec 25 - potential coverage gap") |
+| One-click actions | Manager can approve recommendations with single click (send shift offer, redistribute tasks). Streamlined workflow reduces decision time from minutes to seconds (e.g., manager clicks "Approve Redistribution" → system updates roster automatically) |
+
+**Technical Components:**
+- **Real-time monitoring service:** Clock-in tracking, attendance anomaly detection, continuous roster state monitoring
+- **Gap detection engine:** Coverage analysis algorithm comparing scheduled vs actual state
+- **Recommendation engine:** ML-based suggestions for task redistribution and replacement staff (skills matching, availability scoring, workload balancing)
+- **Demand surge detector:** Real-time POS/sales data integration, threshold monitoring, pattern recognition
+- **Action execution service:** One-click approval processing, automated roster updates, notification triggers
+- **Predictive analytics module:** Forecasted gap prediction using historical patterns, leave request analysis
+- **Notification service:** Real-time alerts to managers via push notifications, SMS, in-app alerts
+
+---
+
+### **Module 8: Leave Management System**
 **Description:** Leave requests, approvals, balance tracking, and roster integration
 
 **Capabilities Delivered:**
@@ -218,7 +245,7 @@
 
 ---
 
-### **Module 8: Mobile App (iOS & Android)**
+### **Module 9: Mobile App (iOS & Android)**
 **Description:** Native mobile applications for employees and managers
 
 **Capabilities Delivered:**
@@ -230,6 +257,7 @@
 | Request time off | Apply for leave from anywhere via mobile. Submit leave requests with manager approval workflow, receive confirmation notifications immediately |
 | Shift swap initiation | Trade shifts with colleagues directly from mobile. Offer shifts to eligible colleagues, receive acceptances, and route to manager for approval - all within the app |
 | Push notifications for changes | Get instant updates for schedule modifications. Receive immediate notifications when shifts are changed, added, or cancelled (e.g., "Your Tuesday shift moved from 9 AM to 2 PM") |
+| Real-time alerts for roster gaps and recommendations | Managers receive instant alerts for absences and demand surges with actionable recommendations. Mobile app shows gap alerts with one-click approval options (e.g., "Ramesh absent - Approve Redistribution" or "Call Anjali") |
 | Offline mode for schedule viewing | View schedules without internet connection. Last synced schedule data cached locally, allowing employees to check schedules even in no-network areas |
 
 **Technical Components:**
@@ -242,7 +270,7 @@
 
 ---
 
-### **Module 9: Web Portal (Employee & Manager)**
+### **Module 10: Web Portal (Employee & Manager)**
 **Description:** Web-based interfaces for desktop users
 
 **Capabilities Delivered:**
@@ -264,7 +292,7 @@
 
 ---
 
-### **Module 10: Integration Layer & API Platform**
+### **Module 11: Integration Layer & API Platform**
 **Description:** External system connectors and unified API gateway
 
 **Capabilities Delivered:**
@@ -288,7 +316,7 @@
 
 ---
 
-### **Module 11: Cost Management & Budgeting**
+### **Module 12: Cost Management & Budgeting**
 **Description:** Labor cost tracking, budget management, and overtime alerts
 
 **Capabilities Delivered:**
@@ -310,7 +338,7 @@
 
 ---
 
-### **Module 12: Notification & Communication Service**
+### **Module 13: Notification & Communication Service**
 **Description:** Multi-channel notification system and in-app messaging
 
 **Capabilities Delivered:**
@@ -332,7 +360,7 @@
 
 ---
 
-### **Module 13: Analytics & Reporting Engine**
+### **Module 14: Analytics & Reporting Engine**
 **Description:** Business intelligence, dashboards, and report generation
 
 **Capabilities Delivered:**

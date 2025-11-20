@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-**For leadership:** Transitioning from vendor evaluation to in-house build. Organized 16 features into **10 core technical modules** spanning backend services, mobile apps, and integrations. Priority modules (Scheduling Engine, Task-Based Operations, Compliance Engine, API Gateway) deliver 80% of business value and establish the platform foundation for both customer-facing and operational workforce planning.
+**For leadership:** Transitioning from vendor evaluation to in-house build. Organized 17 features into **11 core technical modules** spanning backend services, mobile apps, and integrations. Priority modules (Scheduling Engine, Task-Based Operations, Compliance Engine, Real-Time Roster Intelligence, API Gateway) deliver 80% of business value and establish the platform foundation for both customer-facing and operational workforce planning.
 
 **Timeline:** 12-18 months for full MVP (P0+P1 features)  
 **Team recommendation:** 8-12 engineers (3 backend, 2 mobile, 2 frontend, 2 integration, 1 DevOps, 1-2 QA)
@@ -184,7 +184,7 @@
 - **Task integration layer:** Combine demand + task-based requirements
 
 **Dependencies:**
-- Integration Layer (Module 10) for POS data
+- Integration Layer (Module 11) for POS data
 - Module 1 (Scheduling Engine) consumes forecasts
 - Module 2 (Task-Based Operations) for combined manpower calculations
 
@@ -212,7 +212,7 @@
 - **Transfer management:** Handle location changes
 
 **Dependencies:**
-- Integration Layer (Module 10) for HRIS sync
+- Integration Layer (Module 11) for HRIS sync
 - Module 3 (Compliance Engine) for contract validation
 
 ---
@@ -239,12 +239,50 @@
 - **Exception detector:** Real-time anomaly detection
 
 **Dependencies:**
-- Module 8 (Mobile App) for GPS and photo capture
-- Module 10 (Integration Layer) for payroll export
+- Module 9 (Mobile App) for GPS and photo capture
+- Module 11 (Integration Layer) for payroll export
 
 ---
 
-### **Module 7: Leave Management System**
+### **Module 7: Real-Time Roster Intelligence & Recommendations** 🎯 CRITICAL PATH
+**Priority:** P0  
+**Description:** Proactive gap detection, alerts, and actionable recommendations for roster disruptions and demand surges. Enables rapid response to unexpected situations (absences, no-shows, demand spikes) and reduces manager decision-making time during operational crises.
+
+**Capabilities Delivered:**
+
+| Capability | Description |
+|------------|-------------|
+| Absence detection | Automatically detects when employees don't clock in at scheduled time. System monitors clock-in events and alerts manager within minutes if scheduled employee hasn't checked in (e.g., "Ramesh scheduled 9 AM - no clock-in at 9:15 AM") |
+| Gap analysis | Identifies coverage gaps in real-time (no-show, late arrival, early departure). Analyzes current roster state vs scheduled state to detect missing coverage (e.g., "2 cashiers scheduled, 1 absent - coverage gap detected") |
+| Task redistribution recommendations | Suggests how to redistribute absent employee's tasks among available staff. Analyzes skills, current workload, and task requirements to recommend optimal redistribution (e.g., "Ramesh's delivery unloading task can be covered by Suresh (available, forklift certified)") |
+| Replacement recommendations | Recommends eligible employees to call in (available, qualified, within contract hours). ML-based matching considering availability, skills, location proximity, and contract limits (e.g., "Recommended: Anjali (95% match - available, qualified, 1 hour away)") |
+| Demand surge detection | Monitors real-time foot traffic/sales data and detects sudden increases above forecast. Integrates with POS systems to identify unexpected demand spikes (e.g., "2 PM footfall 50% above forecast - surge detected") |
+| Surge response recommendations | Suggests immediate actions when demand spikes (call in backup staff, extend current shifts, redistribute tasks). Provides actionable options with cost/time impact (e.g., "Option 1: Extend Priya's shift by 2 hours - cost ₹800" OR "Option 2: Call in Anjali - cost ₹600, 1 hour away") |
+| Forecasted gap alerts | Predicts potential gaps before they occur (e.g., multiple leave requests for same day). Uses historical patterns and current leave requests to warn managers proactively (e.g., "Warning: 3 employees requested leave on Dec 25 - potential coverage gap") |
+| One-click actions | Manager can approve recommendations with single click (send shift offer, redistribute tasks). Streamlined workflow reduces decision time from minutes to seconds (e.g., manager clicks "Approve Redistribution" → system updates roster automatically) |
+
+**Technical Components:**
+- **Real-time monitoring service:** Clock-in tracking, attendance anomaly detection, continuous roster state monitoring
+- **Gap detection engine:** Coverage analysis algorithm comparing scheduled vs actual state
+- **Recommendation engine:** ML-based suggestions for task redistribution and replacement staff (skills matching, availability scoring, workload balancing)
+- **Demand surge detector:** Real-time POS/sales data integration, threshold monitoring, pattern recognition
+- **Action execution service:** One-click approval processing, automated roster updates, notification triggers
+- **Predictive analytics module:** Forecasted gap prediction using historical patterns, leave request analysis
+- **Notification service:** Real-time alerts to managers via push notifications, SMS, in-app alerts
+- **Data models:** GapEvent, Recommendation, SurgeAlert, ActionLog
+
+**Dependencies:**
+- Module 1 (Scheduling Engine) for roster updates and conflict validation
+- Module 2 (Task-Based Operations) for task redistribution logic
+- Module 5 (Workforce Management) for employee availability and skills data
+- Module 6 (Time & Attendance) for clock-in events and absence detection
+- Module 9 (Mobile App) for manager alerts and one-click approvals
+- Module 11 (Integration Layer) for real-time POS/sales data
+- Module 13 (Notification Service) for multi-channel alerts
+
+---
+
+### **Module 8: Leave Management System**
 **Priority:** P1  
 **Description:** Leave requests, approvals, balance tracking, and roster integration
 
@@ -271,7 +309,7 @@
 
 ---
 
-### **Module 8: Mobile App (iOS & Android)**
+### **Module 9: Mobile App (iOS & Android)**
 **Priority:** P0  
 **Description:** Native mobile applications for employees and managers
 
@@ -284,6 +322,7 @@
 | Request time off | Apply for leave from anywhere via mobile. Submit leave requests with manager approval workflow, receive confirmation notifications immediately |
 | Shift swap initiation | Trade shifts with colleagues directly from mobile. Offer shifts to eligible colleagues, receive acceptances, and route to manager for approval - all within the app |
 | Push notifications for changes | Get instant updates for schedule modifications. Receive immediate notifications when shifts are changed, added, or cancelled (e.g., "Your Tuesday shift moved from 9 AM to 2 PM") |
+| Real-time alerts for roster gaps and recommendations | Managers receive instant alerts for absences and demand surges with actionable recommendations. Mobile app shows gap alerts with one-click approval options (e.g., "Ramesh absent - Approve Redistribution" or "Call Anjali") |
 | Offline mode for schedule viewing | View schedules without internet connection. Last synced schedule data cached locally, allowing employees to check schedules even in no-network areas |
 
 **Technical Components:**
@@ -295,13 +334,14 @@
 - **Offline storage:** SQLite for local schedule caching
 
 **Dependencies:**
-- API Gateway (Module 10) for all backend calls
+- API Gateway (Module 11) for all backend calls
 - Module 6 (Time & Attendance) for clock-in
-- Module 12 (Notification Service) for push notifications
+- Module 7 (Real-Time Roster Intelligence) for gap alerts and recommendations
+- Module 13 (Notification Service) for push notifications
 
 ---
 
-### **Module 9: Web Portal (Employee & Manager)**
+### **Module 10: Web Portal (Employee & Manager)**
 **Priority:** P0 (Manager) + P1 (Employee Self-Service)  
 **Description:** Web-based interfaces for desktop users
 
@@ -323,12 +363,12 @@
 - **Admin panel:** System configuration, user management
 
 **Dependencies:**
-- API Gateway (Module 10) for backend integration
+- API Gateway (Module 11) for backend integration
 - All backend modules for data
 
 ---
 
-### **Module 10: Integration Layer & API Platform**
+### **Module 11: Integration Layer & API Platform**
 **Priority:** P0 (API Gateway) + P1 (Integrations)  
 **Description:** External system connectors and unified API gateway
 
@@ -357,7 +397,7 @@
 
 ---
 
-### **Module 11: Cost Management & Budgeting**
+### **Module 12: Cost Management & Budgeting**
 **Priority:** P0  
 **Description:** Labor cost tracking, budget management, and overtime alerts
 
@@ -381,11 +421,11 @@
 **Dependencies:**
 - Module 1 (Scheduling Engine) for schedule cost calculation
 - Module 4 (Forecasting) for revenue data
-- Module 10 (Integration) for payroll rate sync
+- Module 11 (Integration) for payroll rate sync
 
 ---
 
-### **Module 12: Notification & Communication Service**
+### **Module 13: Notification & Communication Service**
 **Priority:** P2 (but foundational - recommend P1)  
 **Description:** Multi-channel notification system and in-app messaging
 
@@ -412,7 +452,7 @@
 
 ---
 
-### **Module 13: Analytics & Reporting Engine**
+### **Module 14: Analytics & Reporting Engine**
 **Priority:** P2 (recommend P1 for basic reports)  
 **Description:** Business intelligence, dashboards, and report generation
 
@@ -435,7 +475,7 @@
 
 **Dependencies:**
 - All modules for data sources
-- Module 12 (Notification Service) for scheduled delivery
+- Module 13 (Notification Service) for scheduled delivery
 
 ---
 
@@ -443,19 +483,20 @@
 
 | Module | Reach | Impact | Confidence | Effort | RICE Score | Priority | Build Phase |
 |--------|-------|--------|------------|--------|------------|----------|-------------|
-| **Module 10: Integration Layer & API Platform** | 1000 | 3 | 90% | 5 | 540 | **1st** | Phase 0 (Foundation) |
+| **Module 11: Integration Layer & API Platform** | 1000 | 3 | 90% | 5 | 540 | **1st** | Phase 0 (Foundation) |
 | **Module 5: Workforce Management (P0)** | 1000 | 3 | 95% | 3 | 950 | **2nd** | Phase 0 (Foundation) |
-| **Module 3: Compliance Engine** | 1000 | 3 | 85% | 4 | 638 | **3rd** | Phase 1 (Core) |
-| **Module 11: Cost Management** | 500 | 3 | 90% | 2.5 | 540 | **4th** | Phase 1 (Core) |
-| **Module 1: Scheduling Engine** | 1000 | 3 | 70% | 6 | 350 | **5th** | Phase 1 (Core) |
-| **Module 2: Task-Based Operations** | 700 | 3 | 75% | 4 | 394 | **6th** | Phase 1 (Core) |
-| **Module 4: Forecasting Service** | 800 | 2 | 60% | 5 | 192 | **7th** | Phase 1 (Core) |
-| **Module 12: Notification Service** | 900 | 2 | 85% | 2.5 | 612 | **8th** | Phase 2 (UX) |
-| **Module 8: Mobile App** | 900 | 3 | 80% | 5 | 432 | **9th** | Phase 2 (UX) |
-| **Module 9: Web Portal** | 700 | 2 | 85% | 4.5 | 264 | **10th** | Phase 2 (UX) |
-| **Module 6: Time & Attendance** | 800 | 2 | 80% | 3.5 | 366 | **11th** | Phase 3 (Operations) |
-| **Module 7: Leave Management** | 600 | 2 | 90% | 2.5 | 432 | **12th** | Phase 3 (Operations) |
-| **Module 13: Analytics & Reporting** | 400 | 2 | 75% | 3.5 | 171 | **13th** | Phase 4 (Intelligence) |
+| **Module 7: Real-Time Roster Intelligence** | 1000 | 3 | 80% | 2 | 1200 | **3rd** | Phase 1 (Core) |
+| **Module 3: Compliance Engine** | 1000 | 3 | 85% | 4 | 638 | **4th** | Phase 1 (Core) |
+| **Module 12: Cost Management** | 500 | 3 | 90% | 2.5 | 540 | **5th** | Phase 1 (Core) |
+| **Module 1: Scheduling Engine** | 1000 | 3 | 70% | 6 | 350 | **6th** | Phase 1 (Core) |
+| **Module 2: Task-Based Operations** | 700 | 3 | 75% | 4 | 394 | **7th** | Phase 1 (Core) |
+| **Module 4: Forecasting Service** | 800 | 2 | 60% | 5 | 192 | **8th** | Phase 1 (Core) |
+| **Module 13: Notification Service** | 900 | 2 | 85% | 2.5 | 612 | **9th** | Phase 2 (UX) |
+| **Module 9: Mobile App** | 900 | 3 | 80% | 5 | 432 | **10th** | Phase 2 (UX) |
+| **Module 10: Web Portal** | 700 | 2 | 85% | 4.5 | 264 | **11th** | Phase 2 (UX) |
+| **Module 6: Time & Attendance** | 800 | 2 | 80% | 3.5 | 366 | **12th** | Phase 3 (Operations) |
+| **Module 8: Leave Management** | 600 | 2 | 90% | 2.5 | 432 | **13th** | Phase 3 (Operations) |
+| **Module 14: Analytics & Reporting** | 400 | 2 | 75% | 3.5 | 171 | **14th** | Phase 4 (Intelligence) |
 
 **RICE Methodology:**
 - **Reach:** Users impacted per month (employees + managers)
@@ -472,7 +513,7 @@
 **Goal:** Establish platform infrastructure and data foundation
 
 **Modules to Build:**
-1. API Gateway & Authentication (Module 10 - partial)
+1. API Gateway & Authentication (Module 11 - partial)
 2. Database schema & core data models
 3. Workforce Management P0 (Module 5 - partial)
 4. DevOps setup (CI/CD, monitoring, environments)
@@ -487,15 +528,16 @@
 
 ---
 
-### **Phase 1: Core Scheduling (Months 4-9)**
-**Goal:** Build the heart of the system - scheduling with compliance, cost control, and operational task management
+### **Phase 1: Core Scheduling (Months 4-10)**
+**Goal:** Build the heart of the system - scheduling with compliance, cost control, operational task management, and real-time intelligence
 
 **Modules to Build:**
 1. Compliance Engine (Module 3) - COMPLETE
-2. Cost Management (Module 11) - COMPLETE
+2. Cost Management (Module 12) - COMPLETE
 3. Scheduling Engine (Module 1) - COMPLETE
 4. Task-Based Operations Management (Module 2) - COMPLETE (configurable per store)
-5. Forecasting Service (Module 4) - MVP
+5. Real-Time Roster Intelligence (Module 7) - COMPLETE
+6. Forecasting Service (Module 4) - MVP
 
 **Deliverables:**
 - ✅ Manual schedule creation with compliance validation
@@ -503,22 +545,25 @@
 - ✅ Automated schedule generation (basic)
 - ✅ Task-based operational scheduling (configurable per store format)
 - ✅ Task completion tracking and monitoring
+- ✅ Real-time gap detection and absence alerts
+- ✅ Actionable recommendations for task redistribution and replacement staff
+- ✅ Demand surge detection with response suggestions
 - ✅ Simple demand forecasting (historical averages)
-- ✅ Basic web UI for managers to create/edit schedules and manage tasks
+- ✅ Basic web UI for managers to create/edit schedules, manage tasks, and respond to alerts
 
-**Team:** 6-8 engineers (3 backend, 1 ML, 2 frontend, 1 QA, 1 DevOps)
+**Team:** 7-9 engineers (4 backend, 1 ML, 2 frontend, 1 QA, 1 DevOps)
 
-**Milestone:** Pilot with 2-3 stores using web UI only
+**Milestone:** Pilot with 2-3 stores using web UI with real-time intelligence
 
 ---
 
-### **Phase 2: User Experience (Months 10-14)**
-**Goal:** Deliver mobile-first employee experience and self-service
+### **Phase 2: User Experience (Months 11-15)**
+**Goal:** Deliver mobile-first employee experience and self-service with real-time alerts
 
 **Modules to Build:**
-1. Notification Service (Module 12) - COMPLETE
-2. Mobile App (Module 8) - MVP (view schedules, basic clock-in)
-3. Web Portal (Module 9) - Employee self-service
+1. Notification Service (Module 13) - COMPLETE
+2. Mobile App (Module 9) - MVP (view schedules, basic clock-in, gap alerts)
+3. Web Portal (Module 10) - Employee self-service
 4. Workforce Management P1 (Module 5 - self-service features)
 
 **Deliverables:**
@@ -526,6 +571,7 @@
 - ✅ Push notifications working
 - ✅ Employees can view schedules, set availability, request leave
 - ✅ Basic clock-in/out via mobile
+- ✅ Manager gap alerts with one-click approvals on mobile
 
 **Team:** 8-10 engineers (2 backend, 2 mobile, 2 frontend, 1 QA, 1 DevOps)
 
@@ -533,13 +579,13 @@
 
 ---
 
-### **Phase 3: Operations (Months 15-18)**
+### **Phase 3: Operations (Months 16-19)**
 **Goal:** Complete time tracking, leave management, and integrations
 
 **Modules to Build:**
 1. Time & Attendance (Module 6) - COMPLETE
-2. Leave Management (Module 7) - COMPLETE
-3. Integration Layer (Module 10) - Payroll, HRIS connectors
+2. Leave Management (Module 8) - COMPLETE
+3. Integration Layer (Module 11) - Payroll, HRIS connectors
 4. Mobile App enhancements (shift swapping, timesheet editing)
 
 **Deliverables:**
@@ -555,15 +601,16 @@
 
 ---
 
-### **Phase 4: Intelligence (Months 19-24+)**
+### **Phase 4: Intelligence (Months 20-24+)**
 **Goal:** Advanced analytics, AI improvements, P2 features
 
 **Modules to Build:**
-1. Analytics & Reporting (Module 13) - COMPLETE
+1. Analytics & Reporting (Module 14) - COMPLETE
 2. Forecasting improvements (ML model enhancements)
 3. Workforce Management P2 (skills tracking, certifications)
 4. Advanced scheduling features (what-if scenarios, optimization)
 5. Task-based scheduling enhancements (AI-driven task optimization)
+6. Real-Time Roster Intelligence enhancements (predictive gap alerts, advanced ML recommendations)
 
 **Deliverables:**
 - ✅ Executive dashboards with key metrics
@@ -950,13 +997,13 @@
 ```
 ┌─────────────────────────────────────────────────────────┐
 │               START: Foundation Layer                    │
-│ (Module 10: API Gateway + Module 5: Workforce Mgmt P0)  │
+│ (Module 11: API Gateway + Module 5: Workforce Mgmt P0)  │
 └──────────────────────┬──────────────────────────────────┘
                        │
            ┌───────────┴───────────┐
            ▼                       ▼
 ┌──────────────────────┐  ┌──────────────────────┐
-│ Module 3:            │  │ Module 11:           │
+│ Module 3:            │  │ Module 12:           │
 │ Compliance Engine    │  │ Cost Management      │
 └──────────┬───────────┘  └──────────┬───────────┘
            │                         │
@@ -976,26 +1023,31 @@
            │                         │
            └───────────┬─────────────┘
                        ▼
+┌──────────────────────────────────────────┐
+│ Module 7: Real-Time Roster Intelligence  │
+│ (Depends on scheduling + time tracking)  │
+└──────────────────────┬───────────────────┘
+                       ▼
            ┌───────────────────────┐
-           │ Module 12:            │
+           │ Module 13:            │
            │ Notification Service  │
            └───────────┬───────────┘
                        │
            ┌───────────┴───────────┐
            ▼                       ▼
 ┌──────────────────────┐  ┌──────────────────────┐
-│ Module 8:            │  │ Module 9:            │
+│ Module 9:            │  │ Module 10:           │
 │ Mobile App           │  │ Web Portal           │
 └──────────┬───────────┘  └──────────────────────┘
            │
            ▼
 ┌──────────────────────────────────────────┐
-│ Module 6 & 7:                            │
+│ Module 6 & 8:                            │
 │ Time & Attendance + Leave Management     │
 └──────────┬───────────────────────────────┘
            ▼
 ┌──────────────────────────────────────────┐
-│ Module 13:                               │
+│ Module 14:                               │
 │ Analytics & Reporting Engine             │
 └──────────────────────────────────────────┘
 ```

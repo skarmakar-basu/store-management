@@ -78,6 +78,20 @@ Native iOS/Android apps for schedule access and workforce management on-the-go
 | Push notifications | Get instant updates. Example: Manager changes Monday shift from 10 AM to 2 PM - notification pops up on Kavita's phone immediately: "Schedule changed! Check app" |
 | Offline mode | View schedule without internet. Example: Suresh checks schedule while traveling in no-network area - last synced schedule shows on app, works without data connection |
 
+### Real-Time Roster Intelligence & Recommendations
+Proactive gap detection, alerts, and actionable recommendations for roster disruptions and demand surges
+
+| Key Capability | Key Capability Description |
+|----------------|----------------------------|
+| Absence detection | Automatically detects no-shows and alerts manager. Example: Ramesh scheduled 9 AM, doesn't clock in by 9:15 AM - system instantly sends alert to manager: "Ramesh absent - shift started 15 mins ago" |
+| Gap analysis | Identifies coverage gaps in real-time. Example: 2 cashiers scheduled for lunch rush, only 1 present - system flags "1 cashier short, coverage gap at registers" and alerts manager immediately |
+| Task redistribution recommendations | Suggests how to cover absent employee's tasks. Example: "Ramesh absent - his delivery unloading task can be covered by Suresh (available, forklift certified) + Priya can cover his cashier backup duty" |
+| Replacement recommendations | Recommends who to call in. Example: "Recommended replacements: Anjali (95% match - available today, qualified, lives 20 mins away, within contract hours)" with one-click call option |
+| Demand surge detection | Monitors real-time sales/footfall and detects spikes. Example: "2 PM footfall 50% above forecast - detected surge at entrance counters, need additional staff immediately" |
+| Surge response recommendations | Suggests immediate actions for demand spikes. Example: "Option 1: Extend Priya's shift by 2 hours (cost ₹800)" OR "Option 2: Call in Anjali (cost ₹600, arrives in 1 hour)" |
+| Forecasted gap alerts | Predicts gaps before they occur. Example: "Warning: 3 cashiers requested leave on Dec 25 (Diwali week) - potential coverage gap, recommend approving only 1 leave request" |
+| One-click actions | Manager approves recommendations instantly. Example: Manager clicks "Approve Redistribution" - system updates roster, notifies Suresh and Priya of new tasks, logs action - all in 5 seconds |
+
 ---
 
 ## P1 Features - High Priority

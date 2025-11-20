@@ -12,11 +12,11 @@ AI-driven scheduling engine that creates conflict-free rosters based on employee
 
 | Key Capability | Key Capability Description |
 |----------------|----------------------------|
-| Skills-based matching | Automatically assigns employees to shifts based on their qualifications (e.g., certified cashiers, floor supervisors) |
-| Availability constraint handling | Ensures employees are only scheduled during their available hours and respects their preferences |
-| Contract hours enforcement | Enforces minimum/maximum hours limits for full-time and part-time employees per contract terms |
-| Conflict detection | Identifies and prevents double-booking, overlapping shifts, and overtime violations before schedule publication |
-| Template support | Allows creation and reuse of recurring schedule patterns (weekly, bi-weekly, monthly) |
+| Skills-based matching | Only assigns qualified employees to specialized roles. Example: Priya with POS certification gets cashier shifts; Ramesh without certification doesn't |
+| Availability constraint handling | Respects employee availability preferences. Example: Anjali marked unavailable Sundays for temple visits - system never schedules her on Sundays |
+| Contract hours enforcement | Prevents over/under-scheduling per contract. Example: Part-timer Vikram's contract limits him to 20 hours/week - system blocks 21st hour automatically |
+| Conflict detection | Catches scheduling errors before publishing. Example: Alerts manager if Deepa is scheduled 9 AM-6 PM at Indiranagar AND 5 PM-10 PM at Koramangala same day |
+| Template support | Reuses proven schedule patterns. Example: Save "Diwali Sale" template (extra staff 10 AM-9 PM) and apply it next year with one click |
 
 ### Demand-Based Forecasting
 Aligns staffing levels with predicted foot traffic and sales to optimize labor deployment

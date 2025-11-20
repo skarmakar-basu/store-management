@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-**For leadership:** Transitioning from vendor evaluation to in-house build. Organized 15 features into **9 core technical modules** spanning backend services, mobile apps, and integrations. Priority modules (Scheduling Engine, Compliance Engine, API Gateway) deliver 75% of business value and establish the platform foundation.
+**For leadership:** Transitioning from vendor evaluation to in-house build. Organized 16 features into **10 core technical modules** spanning backend services, mobile apps, and integrations. Priority modules (Scheduling Engine, Task-Based Operations, Compliance Engine, API Gateway) deliver 80% of business value and establish the platform foundation for both customer-facing and operational workforce planning.
 
 **Timeline:** 12-18 months for full MVP (P0+P1 features)  
 **Team recommendation:** 8-12 engineers (3 backend, 2 mobile, 2 frontend, 2 integration, 1 DevOps, 1-2 QA)
@@ -36,14 +36,17 @@
 ┌───────────────────────────┴─────────────────────────────────┐
 │                    CORE SERVICES LAYER                       │
 ├──────────────────┬──────────────────┬──────────────────────┤
-│  Scheduling      │  Compliance      │  Forecasting         │
-│  Engine          │  Engine          │  Service             │
+│  Scheduling      │  Task-Based      │  Compliance          │
+│  Engine          │  Operations      │  Engine              │
 ├──────────────────┼──────────────────┼──────────────────────┤
-│  Workforce       │  Time &          │  Leave               │
-│  Management      │  Attendance      │  Management          │
+│  Forecasting     │  Workforce       │  Cost                │
+│  Service         │  Management      │  Management          │
 ├──────────────────┼──────────────────┼──────────────────────┤
-│  Cost            │  Notification    │  Analytics &         │
-│  Management      │  Service         │  Reporting           │
+│  Time &          │  Leave           │  Notification        │
+│  Attendance      │  Management      │  Service             │
+├──────────────────┼──────────────────┼──────────────────────┤
+│  Analytics &     │                  │                      │
+│  Reporting       │                  │                      │
 └──────────────────┴──────────────────┴──────────────────────┘
                             ▲
                             │
@@ -71,12 +74,11 @@
 
 | Capability | Description |
 |------------|-------------|
-| Skills-based role matching | Only assigns qualified employees to specialized roles. Ensures employees with required certifications (e.g., POS certification for cashier shifts) are matched to appropriate positions |
+| Skills-based matching | Only assigns qualified employees to specialized roles. Ensures employees with required certifications (e.g., POS certification for cashier shifts) are matched to appropriate positions |
 | Availability constraint handling | Respects employee availability preferences and blackout periods. System never schedules employees during their marked unavailable times (e.g., Sundays for religious observances) |
 | Contract hours enforcement | Prevents over/under-scheduling per contract terms. Automatically blocks scheduling beyond agreed hours (e.g., part-timer's 20 hours/week limit) |
-| Conflict detection & resolution | Catches scheduling errors before publishing. Alerts managers to double-bookings, overlapping shifts at different locations, or other scheduling conflicts |
-| Template management for recurring schedules | Reuses proven schedule patterns for recurring events. Save templates (e.g., "Diwali Sale" schedule) and apply them with one click for future similar periods |
-| Manual override & adjustment | Allows managers to manually adjust auto-generated schedules. Provides flexibility to fine-tune schedules based on business needs or special circumstances |
+| Conflict detection | Catches scheduling errors before publishing. Alerts managers to double-bookings, overlapping shifts at different locations, or other scheduling conflicts |
+| Template support | Reuses proven schedule patterns for recurring events. Save templates (e.g., "Diwali Sale" schedule) and apply them with one click for future similar periods |
 
 **Technical Components:**
 - **Constraint solver:** Linear programming optimization (OR-Tools, OptaPlanner)
@@ -86,13 +88,51 @@
 - **Data models:** Shifts, Assignments, Constraints, Templates
 
 **Dependencies:**
-- Module 2 (Compliance Engine) for rule validation
-- Module 3 (Forecasting Service) for demand inputs
-- Module 4 (Workforce Management) for employee data
+- Module 2 (Task-Based Operations) for operational task requirements
+- Module 3 (Compliance Engine) for rule validation
+- Module 4 (Forecasting Service) for demand inputs
+- Module 5 (Workforce Management) for employee data
 
 ---
 
-### **Module 2: Compliance Engine** 🎯 CRITICAL PATH
+### **Module 2: Task & Activity-Based Operations Management** 🎯 CRITICAL PATH
+**Priority:** P0 (for grocery/supermarket/hypermarket formats) | P2 (for boutique/fashion formats - configurable)  
+**Description:** Operational task management system that calculates manpower requirements based on recurring tasks (deliveries, stocking, cleaning) alongside customer service needs. Ensures operational workflows are properly staffed.
+
+**Capabilities Delivered:**
+
+| Capability | Description |
+|------------|-------------|
+| Define recurring operational tasks | Set up repeating operational activities with specific requirements. Create tasks like "Delivery unloading Mon/Wed/Fri 7-9 AM, needs 3 people with forklift cert" and system ensures these are staffed every week |
+| Task-to-manpower calculation | Optimize total staff allocation across tasks and customer service. System calculates delivery (3 people) + stocking (2 people) + cashiers (4 people) = 9 total, but optimizes to 6 by intelligently reusing staff across overlapping tasks |
+| Task prioritization (P0/P1/P2 activities) | Critical tasks get guaranteed staffing allocation. P0 tasks like "Floor cleaning every 2 hours" always staffed; P2 tasks like "Storage audit" can be postponed if short-staffed during peak periods |
+| Task-specific skill requirements | Match only qualified staff to specialized tasks. System ensures only forklift-certified employees assigned to warehouse delivery unloading, blocking unqualified staff from this dangerous task |
+| Frequency-based scheduling | Automate recurring task scheduling. Tasks like "Freezer temp check every 6 hours" automatically appear in schedule at 9 AM, 3 PM, 9 PM daily without manual manager entry |
+| Store-specific task variation | Configure different operational tasks per store format. Big Bazaar has daily deliveries and bakery maintenance tasks; FabIndia boutique only has weekly inventory and window display - each configured separately |
+| Integration with demand forecasting | Unified manpower planning combining operational and customer needs. Monday 8 AM requires 3 for delivery task + 4 for customer service demand = optimized 6-person schedule accounting for task overlap |
+| Task completion tracking and compliance | Monitor and audit operational task execution. System tracks "Freezer check completed 9:05 AM by Lakshmi ✅" and alerts managers if missed - provides audit trail for food safety inspections |
+
+**Technical Components:**
+- **Task definition engine:** CRUD for operational tasks with recurrence rules
+- **Manpower calculator:** Optimization algorithm for task + demand staffing
+- **Task scheduler:** Auto-generate task assignments within rosters
+- **Completion tracker:** Real-time task status monitoring
+- **Store configurator:** Enable/disable task-based mode per store format
+- **Skills matcher:** Ensure qualified staff assigned to specialized tasks
+- **Priority engine:** Guarantee P0 task coverage during optimization
+- **Audit logger:** Immutable task completion records
+
+**Dependencies:**
+- Module 1 (Scheduling Engine) integrates task assignments into rosters
+- Module 3 (Forecasting Service) for combined demand + task calculations
+- Module 4 (Workforce Management) for employee skills/certifications
+- Module 3 (Compliance Engine) for work hour validation with tasks
+
+**Configurability:** This module can be enabled/disabled per store type. P0 for operational-heavy formats (grocery, supermarket, hypermarket); can be disabled for customer-service-only formats (boutique, fashion retail).
+
+---
+
+### **Module 3: Compliance Engine** 🎯 CRITICAL PATH
 **Priority:** P0  
 **Description:** Rules engine enforcing labor laws, awards, and company policies
 
@@ -116,11 +156,12 @@
 
 **Dependencies:**
 - Module 1 (Scheduling Engine) consumes validation results
+- Module 2 (Task-Based Operations) validates task assignments
 - Module 4 (Workforce Management) for employee contract data
 
 ---
 
-### **Module 3: Forecasting Service** 🎯 CRITICAL PATH
+### **Module 4: Forecasting Service** 🎯 CRITICAL PATH
 **Priority:** P0  
 **Description:** Demand prediction engine using historical sales and foot traffic data
 
@@ -132,6 +173,7 @@
 | Seasonal/event-based adjustments | Accounts for festivals, holidays, and special events. Automatically increases staff recommendations for known high-traffic periods (e.g., 50% increase for Diwali week) based on historical data |
 | Peak hour identification | Spots busy time periods throughout the day. Identifies rush hours (e.g., 6 PM-9 PM post-office crowd) and recommends additional staff during those windows |
 | Recommended staffing levels by role/store | Suggests optimal team size by role and location. Provides specific recommendations (e.g., 8 sales floor staff + 4 cashiers + 1 supervisor) based on expected footfall and sales projections |
+| Integration with task-based scheduling | Works together with operational tasks for unified manpower planning. System combines task needs (delivery 3 people) + customer service needs (4 cashiers) = optimized schedule accounting for overlap |
 
 **Technical Components:**
 - **ML forecasting model:** Time-series prediction (Prophet, LSTM)
@@ -139,14 +181,16 @@
 - **Forecasting API:** Serve staffing recommendations
 - **Manual override:** Allow managers to adjust predictions
 - **Model training service:** Periodic retraining with new data
+- **Task integration layer:** Combine demand + task-based requirements
 
 **Dependencies:**
-- Integration Layer (Module 9) for POS data
+- Integration Layer (Module 10) for POS data
 - Module 1 (Scheduling Engine) consumes forecasts
+- Module 2 (Task-Based Operations) for combined manpower calculations
 
 ---
 
-### **Module 4: Workforce Management**
+### **Module 5: Workforce Management**
 **Priority:** P0 (Core) + P1 (Advanced features)  
 **Description:** Employee master data, availability, skills, and preferences management
 
@@ -168,12 +212,12 @@
 - **Transfer management:** Handle location changes
 
 **Dependencies:**
-- Integration Layer (Module 9) for HRIS sync
-- Module 2 (Compliance Engine) for contract validation
+- Integration Layer (Module 10) for HRIS sync
+- Module 3 (Compliance Engine) for contract validation
 
 ---
 
-### **Module 5: Time & Attendance Tracking**
+### **Module 6: Time & Attendance Tracking**
 **Priority:** P1  
 **Description:** Clock in/out, timesheet management, and exception handling
 
@@ -195,12 +239,12 @@
 - **Exception detector:** Real-time anomaly detection
 
 **Dependencies:**
-- Module 7 (Mobile App) for GPS and photo capture
-- Module 9 (Integration Layer) for payroll export
+- Module 8 (Mobile App) for GPS and photo capture
+- Module 10 (Integration Layer) for payroll export
 
 ---
 
-### **Module 6: Leave Management System**
+### **Module 7: Leave Management System**
 **Priority:** P1  
 **Description:** Leave requests, approvals, balance tracking, and roster integration
 
@@ -223,11 +267,11 @@
 
 **Dependencies:**
 - Module 1 (Scheduling Engine) for roster updates
-- Module 4 (Workforce Management) for employee data
+- Module 5 (Workforce Management) for employee data
 
 ---
 
-### **Module 7: Mobile App (iOS & Android)**
+### **Module 8: Mobile App (iOS & Android)**
 **Priority:** P0  
 **Description:** Native mobile applications for employees and managers
 
@@ -251,13 +295,13 @@
 - **Offline storage:** SQLite for local schedule caching
 
 **Dependencies:**
-- API Gateway (Module 9) for all backend calls
-- Module 5 (Time & Attendance) for clock-in
-- Module 11 (Notification Service) for push notifications
+- API Gateway (Module 10) for all backend calls
+- Module 6 (Time & Attendance) for clock-in
+- Module 12 (Notification Service) for push notifications
 
 ---
 
-### **Module 8: Web Portal (Employee & Manager)**
+### **Module 9: Web Portal (Employee & Manager)**
 **Priority:** P0 (Manager) + P1 (Employee Self-Service)  
 **Description:** Web-based interfaces for desktop users
 
@@ -279,12 +323,12 @@
 - **Admin panel:** System configuration, user management
 
 **Dependencies:**
-- API Gateway (Module 9) for backend integration
+- API Gateway (Module 10) for backend integration
 - All backend modules for data
 
 ---
 
-### **Module 9: Integration Layer & API Platform**
+### **Module 10: Integration Layer & API Platform**
 **Priority:** P0 (API Gateway) + P1 (Integrations)  
 **Description:** External system connectors and unified API gateway
 
@@ -313,7 +357,7 @@
 
 ---
 
-### **Module 10: Cost Management & Budgeting**
+### **Module 11: Cost Management & Budgeting**
 **Priority:** P0  
 **Description:** Labor cost tracking, budget management, and overtime alerts
 
@@ -336,12 +380,12 @@
 
 **Dependencies:**
 - Module 1 (Scheduling Engine) for schedule cost calculation
-- Module 3 (Forecasting) for revenue data
-- Module 9 (Integration) for payroll rate sync
+- Module 4 (Forecasting) for revenue data
+- Module 10 (Integration) for payroll rate sync
 
 ---
 
-### **Module 11: Notification & Communication Service**
+### **Module 12: Notification & Communication Service**
 **Priority:** P2 (but foundational - recommend P1)  
 **Description:** Multi-channel notification system and in-app messaging
 
@@ -363,12 +407,12 @@
 - **Preference manager:** User notification preferences
 
 **Dependencies:**
-- Module 7 (Mobile App) for push notifications
+- Module 8 (Mobile App) for push notifications
 - All modules generate notification events
 
 ---
 
-### **Module 12: Analytics & Reporting Engine**
+### **Module 13: Analytics & Reporting Engine**
 **Priority:** P2 (recommend P1 for basic reports)  
 **Description:** Business intelligence, dashboards, and report generation
 
@@ -391,7 +435,7 @@
 
 **Dependencies:**
 - All modules for data sources
-- Module 11 (Notification Service) for scheduled delivery
+- Module 12 (Notification Service) for scheduled delivery
 
 ---
 
@@ -399,18 +443,19 @@
 
 | Module | Reach | Impact | Confidence | Effort | RICE Score | Priority | Build Phase |
 |--------|-------|--------|------------|--------|------------|----------|-------------|
-| **Module 9: Integration Layer & API Platform** | 1000 | 3 | 90% | 5 | 540 | **1st** | Phase 0 (Foundation) |
-| **Module 4: Workforce Management (P0)** | 1000 | 3 | 95% | 3 | 950 | **2nd** | Phase 0 (Foundation) |
-| **Module 2: Compliance Engine** | 1000 | 3 | 85% | 4 | 638 | **3rd** | Phase 1 (Core) |
-| **Module 10: Cost Management** | 500 | 3 | 90% | 2.5 | 540 | **4th** | Phase 1 (Core) |
+| **Module 10: Integration Layer & API Platform** | 1000 | 3 | 90% | 5 | 540 | **1st** | Phase 0 (Foundation) |
+| **Module 5: Workforce Management (P0)** | 1000 | 3 | 95% | 3 | 950 | **2nd** | Phase 0 (Foundation) |
+| **Module 3: Compliance Engine** | 1000 | 3 | 85% | 4 | 638 | **3rd** | Phase 1 (Core) |
+| **Module 11: Cost Management** | 500 | 3 | 90% | 2.5 | 540 | **4th** | Phase 1 (Core) |
 | **Module 1: Scheduling Engine** | 1000 | 3 | 70% | 6 | 350 | **5th** | Phase 1 (Core) |
-| **Module 3: Forecasting Service** | 800 | 2 | 60% | 5 | 192 | **6th** | Phase 1 (Core) |
-| **Module 11: Notification Service** | 900 | 2 | 85% | 2.5 | 612 | **7th** | Phase 2 (UX) |
-| **Module 7: Mobile App** | 900 | 3 | 80% | 5 | 432 | **8th** | Phase 2 (UX) |
-| **Module 8: Web Portal** | 700 | 2 | 85% | 4.5 | 264 | **9th** | Phase 2 (UX) |
-| **Module 5: Time & Attendance** | 800 | 2 | 80% | 3.5 | 366 | **10th** | Phase 3 (Operations) |
-| **Module 6: Leave Management** | 600 | 2 | 90% | 2.5 | 432 | **11th** | Phase 3 (Operations) |
-| **Module 12: Analytics & Reporting** | 400 | 2 | 75% | 3.5 | 171 | **12th** | Phase 4 (Intelligence) |
+| **Module 2: Task-Based Operations** | 700 | 3 | 75% | 4 | 394 | **6th** | Phase 1 (Core) |
+| **Module 4: Forecasting Service** | 800 | 2 | 60% | 5 | 192 | **7th** | Phase 1 (Core) |
+| **Module 12: Notification Service** | 900 | 2 | 85% | 2.5 | 612 | **8th** | Phase 2 (UX) |
+| **Module 8: Mobile App** | 900 | 3 | 80% | 5 | 432 | **9th** | Phase 2 (UX) |
+| **Module 9: Web Portal** | 700 | 2 | 85% | 4.5 | 264 | **10th** | Phase 2 (UX) |
+| **Module 6: Time & Attendance** | 800 | 2 | 80% | 3.5 | 366 | **11th** | Phase 3 (Operations) |
+| **Module 7: Leave Management** | 600 | 2 | 90% | 2.5 | 432 | **12th** | Phase 3 (Operations) |
+| **Module 13: Analytics & Reporting** | 400 | 2 | 75% | 3.5 | 171 | **13th** | Phase 4 (Intelligence) |
 
 **RICE Methodology:**
 - **Reach:** Users impacted per month (employees + managers)
@@ -427,9 +472,9 @@
 **Goal:** Establish platform infrastructure and data foundation
 
 **Modules to Build:**
-1. API Gateway & Authentication (Module 9 - partial)
+1. API Gateway & Authentication (Module 10 - partial)
 2. Database schema & core data models
-3. Workforce Management P0 (Module 4 - partial)
+3. Workforce Management P0 (Module 5 - partial)
 4. DevOps setup (CI/CD, monitoring, environments)
 
 **Deliverables:**
@@ -443,20 +488,23 @@
 ---
 
 ### **Phase 1: Core Scheduling (Months 4-9)**
-**Goal:** Build the heart of the system - scheduling with compliance and cost control
+**Goal:** Build the heart of the system - scheduling with compliance, cost control, and operational task management
 
 **Modules to Build:**
-1. Compliance Engine (Module 2) - COMPLETE
-2. Cost Management (Module 10) - COMPLETE
+1. Compliance Engine (Module 3) - COMPLETE
+2. Cost Management (Module 11) - COMPLETE
 3. Scheduling Engine (Module 1) - COMPLETE
-4. Forecasting Service (Module 3) - MVP
+4. Task-Based Operations Management (Module 2) - COMPLETE (configurable per store)
+5. Forecasting Service (Module 4) - MVP
 
 **Deliverables:**
 - ✅ Manual schedule creation with compliance validation
 - ✅ Real-time cost tracking during schedule building
 - ✅ Automated schedule generation (basic)
+- ✅ Task-based operational scheduling (configurable per store format)
+- ✅ Task completion tracking and monitoring
 - ✅ Simple demand forecasting (historical averages)
-- ✅ Basic web UI for managers to create/edit schedules
+- ✅ Basic web UI for managers to create/edit schedules and manage tasks
 
 **Team:** 6-8 engineers (3 backend, 1 ML, 2 frontend, 1 QA, 1 DevOps)
 
@@ -468,10 +516,10 @@
 **Goal:** Deliver mobile-first employee experience and self-service
 
 **Modules to Build:**
-1. Notification Service (Module 11) - COMPLETE
-2. Mobile App (Module 7) - MVP (view schedules, basic clock-in)
-3. Web Portal (Module 8) - Employee self-service
-4. Workforce Management P1 (Module 4 - self-service features)
+1. Notification Service (Module 12) - COMPLETE
+2. Mobile App (Module 8) - MVP (view schedules, basic clock-in)
+3. Web Portal (Module 9) - Employee self-service
+4. Workforce Management P1 (Module 5 - self-service features)
 
 **Deliverables:**
 - ✅ iOS + Android apps published to app stores
@@ -489,9 +537,9 @@
 **Goal:** Complete time tracking, leave management, and integrations
 
 **Modules to Build:**
-1. Time & Attendance (Module 5) - COMPLETE
-2. Leave Management (Module 6) - COMPLETE
-3. Integration Layer (Module 9) - Payroll, HRIS connectors
+1. Time & Attendance (Module 6) - COMPLETE
+2. Leave Management (Module 7) - COMPLETE
+3. Integration Layer (Module 10) - Payroll, HRIS connectors
 4. Mobile App enhancements (shift swapping, timesheet editing)
 
 **Deliverables:**
@@ -511,10 +559,11 @@
 **Goal:** Advanced analytics, AI improvements, P2 features
 
 **Modules to Build:**
-1. Analytics & Reporting (Module 12) - COMPLETE
+1. Analytics & Reporting (Module 13) - COMPLETE
 2. Forecasting improvements (ML model enhancements)
 3. Workforce Management P2 (skills tracking, certifications)
 4. Advanced scheduling features (what-if scenarios, optimization)
+5. Task-based scheduling enhancements (AI-driven task optimization)
 
 **Deliverables:**
 - ✅ Executive dashboards with key metrics
@@ -611,11 +660,22 @@
 - Budget for vendor support hours with Payroll/HRIS providers
 - Phased approach: Start with CSV, add API integrations in Phase 3
 
+**5. Task-Based Scheduling Adoption**  
+**Risk:** Store managers resist operational task tracking; see it as micromanagement rather than workforce optimization  
+**Impact:** Task module unused; operational failures continue (unstocked shelves, missed deliveries)  
+**Mitigation:**
+- Make task-based scheduling optional per store format (P0 for grocery/supermarket, disabled for boutique formats)
+- Start with 2-3 high-operational-complexity pilot stores that feel the pain most acutely
+- Show clear ROI: "Zero missed deliveries" vs previous operational failures
+- Simple task setup UI: pre-built templates for common tasks (delivery unloading, freezer checks)
+- Manager training focused on benefits: "Ensures critical work gets done automatically"
+- Gradual rollout: Start with P0 tasks only (deliveries, safety checks), add P1/P2 tasks later
+
 ---
 
 ### **Medium Risk**
 
-**5. Scope Creep**  
+**6. Scope Creep**  
 **Risk:** Stakeholders request additional features during build, delaying MVP  
 **Impact:** Timeline extends to 24+ months, costs increase  
 **Mitigation:**
@@ -624,7 +684,7 @@
 - Regular stakeholder demos showing progress (manage expectations)
 - Document "out of scope" items clearly in Phase 0
 
-**6. Data Migration Quality**  
+**7. Data Migration Quality**  
 **Risk:** Employee data from current system is incomplete, inconsistent, or incorrect  
 **Impact:** Schedules fail validation, poor user experience, rework required  
 **Mitigation:**
@@ -634,7 +694,7 @@
 - Start with pilot stores with cleanest data
 - Plan for manual data entry for problem records
 
-**7. Mobile App Store Approval Delays**  
+**8. Mobile App Store Approval Delays**  
 **Risk:** Apple/Google reject app submissions, delaying launch  
 **Impact:** Phase 2 milestone missed, employees can't access schedules  
 **Mitigation:**
@@ -647,11 +707,11 @@
 
 ### **Low Risk (Monitor)**
 
-**8. Performance at Scale**  
+**9. Performance at Scale**  
 **Risk:** System slows down with large employee counts (1000+ employees, 50+ stores)  
 **Mitigation:** Load testing starting Phase 1, database indexing, caching strategy, horizontal scaling
 
-**9. User Adoption Resistance**  
+**10. User Adoption Resistance**  
 **Risk:** Employees resist new system, prefer old manual processes  
 **Mitigation:** Change management plan, training, champions program, user feedback loops
 
@@ -702,6 +762,8 @@
 - ✅ 2-3 pilot stores fully scheduled using the system (zero manual Excel)
 - ✅ 100% compliance with labor laws (zero violations flagged)
 - ✅ Schedule generation time: <30 minutes for 50-employee store
+- ✅ Task-based scheduling operational for grocery/supermarket formats
+- ✅ 98%+ P0 operational tasks completed on time (for stores using task mode)
 - ✅ Manager satisfaction: NPS >30 (pilot users)
 - ✅ System uptime: 99.5%
 
@@ -723,6 +785,7 @@
 - ✅ Scheduling efficiency: 70% time reduction (7 hrs → 2 hrs/week per manager)
 - ✅ Labor cost variance: Within ±3% of budget
 - ✅ Compliance violations: Zero
+- ✅ Task completion: 98%+ P0 operational tasks completed on time (for stores using task-based mode)
 - ✅ Employee adoption: 90%+ using app weekly
 - ✅ Manager satisfaction: NPS >40
 - ✅ Forecasting accuracy: ±10% variance (Phase 1), improving to ±5% (Phase 4)
@@ -842,12 +905,14 @@
 8. **Cloud deployment:** Kubernetes-based microservices architecture
 9. **Forecasting:** Initial models use statistical methods; ML added in Phase 1.5-2
 10. **Pilot success:** 2-3 stores willing to beta test and provide feedback starting Month 7
+11. **Store format mix:** Chain operates mix of operational-heavy stores (grocery/supermarket requiring task-based scheduling) and customer-service-only formats (boutique/fashion where task module can be disabled)
+12. **Operational tasks:** Recurring operational tasks (deliveries, stocking, cleaning, safety checks) can be standardized and configured per store type
 
 ---
 
 ## Stakeholder Update (2-3 Sentences)
 
-**Decision made:** Building rostering application in-house. Organized 15 features into **9 technical modules** across 4 phases, with critical path focusing on Scheduling Engine, Compliance Engine, and Cost Management. Phase 0 (Foundation) starts Month 1; pilot with 2-3 stores by Month 9; full rollout complete Month 18. **Timeline: 12-18 months to MVP**; estimated investment **$1.8-2.3M** for build, ~$1.5M/year ongoing maintenance.
+**Decision made:** Building rostering application in-house. Organized 16 features into **10 technical modules** across 4 phases, with critical path focusing on Scheduling Engine, Task-Based Operations (for operational formats), Compliance Engine, and Cost Management. Phase 0 (Foundation) starts Month 1; pilot with 2-3 stores by Month 9; full rollout complete Month 18. **Timeline: 12-18 months to MVP**; estimated investment **$1.8-2.3M** for build, ~$1.5M/year ongoing maintenance.
 
 ---
 
@@ -875,7 +940,8 @@
 12. **Database migrations:** Set up schema versioning and migration tools
 13. **Testing framework:** Unit tests, integration tests, load testing setup
 14. **Compliance rules:** Document all labor laws, award rules to be codified
-15. **Phase 1 planning:** Detailed sprint planning for Scheduling Engine development
+15. **Operational task catalog:** Document recurring operational tasks per store format (deliveries, stocking, safety checks)
+16. **Phase 1 planning:** Detailed sprint planning for Scheduling Engine and Task-Based Operations development
 
 ---
 
@@ -884,13 +950,13 @@
 ```
 ┌─────────────────────────────────────────────────────────┐
 │               START: Foundation Layer                    │
-│  (Module 9: API Gateway + Module 4: Workforce Mgmt P0)  │
+│ (Module 10: API Gateway + Module 5: Workforce Mgmt P0)  │
 └──────────────────────┬──────────────────────────────────┘
                        │
            ┌───────────┴───────────┐
            ▼                       ▼
 ┌──────────────────────┐  ┌──────────────────────┐
-│ Module 2:            │  │ Module 10:           │
+│ Module 3:            │  │ Module 11:           │
 │ Compliance Engine    │  │ Cost Management      │
 └──────────┬───────────┘  └──────────┬───────────┘
            │                         │
@@ -901,28 +967,35 @@
            │ Scheduling Engine     │ ◄─── CRITICAL PATH
            └───────────┬───────────┘
                        │
-                       ├────────────────────────┐
-                       ▼                        ▼
-           ┌───────────────────────┐  ┌──────────────────────┐
-           │ Module 3:             │  │ Module 11:           │
-           │ Forecasting Service   │  │ Notification Service │
-           └───────────┬───────────┘  └──────────┬───────────┘
-                       │                         │
-           ┌───────────┴────────────┬────────────┘
-           ▼                        ▼
+           ┌───────────┴───────────┐
+           ▼                       ▼
 ┌──────────────────────┐  ┌──────────────────────┐
-│ Module 7:            │  │ Module 8:            │
+│ Module 2:            │  │ Module 4:            │
+│ Task-Based Ops       │  │ Forecasting Service  │
+└──────────┬───────────┘  └──────────┬───────────┘
+           │                         │
+           └───────────┬─────────────┘
+                       ▼
+           ┌───────────────────────┐
+           │ Module 12:            │
+           │ Notification Service  │
+           └───────────┬───────────┘
+                       │
+           ┌───────────┴───────────┐
+           ▼                       ▼
+┌──────────────────────┐  ┌──────────────────────┐
+│ Module 8:            │  │ Module 9:            │
 │ Mobile App           │  │ Web Portal           │
 └──────────┬───────────┘  └──────────────────────┘
            │
            ▼
 ┌──────────────────────────────────────────┐
-│ Module 5 & 6:                            │
+│ Module 6 & 7:                            │
 │ Time & Attendance + Leave Management     │
 └──────────┬───────────────────────────────┘
            ▼
 ┌──────────────────────────────────────────┐
-│ Module 12:                               │
+│ Module 13:                               │
 │ Analytics & Reporting Engine             │
 └──────────────────────────────────────────┘
 ```

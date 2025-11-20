@@ -26,14 +26,17 @@
 ┌───────────────────────────┴─────────────────────────────────┐
 │                    CORE SERVICES LAYER                       │
 ├──────────────────┬──────────────────┬──────────────────────┤
-│  Scheduling      │  Compliance      │  Forecasting         │
-│  Engine          │  Engine          │  Service             │
+│  Scheduling      │  Task-Based      │  Compliance          │
+│  Engine          │  Operations      │  Engine              │
 ├──────────────────┼──────────────────┼──────────────────────┤
-│  Workforce       │  Time &          │  Leave               │
-│  Management      │  Attendance      │  Management          │
+│  Forecasting     │  Workforce       │  Cost                │
+│  Service         │  Management      │  Management          │
 ├──────────────────┼──────────────────┼──────────────────────┤
-│  Cost            │  Notification    │  Analytics &         │
-│  Management      │  Service         │  Reporting           │
+│  Time &          │  Leave           │  Notification        │
+│  Attendance      │  Management      │  Service             │
+├──────────────────┼──────────────────┼──────────────────────┤
+│  Analytics &     │                  │                      │
+│  Reporting       │                  │                      │
 └──────────────────┴──────────────────┴──────────────────────┘
                             ▲
                             │
@@ -60,12 +63,11 @@
 
 | Capability | Description |
 |------------|-------------|
-| Skills-based role matching | Only assigns qualified employees to specialized roles. Ensures employees with required certifications (e.g., POS certification for cashier shifts) are matched to appropriate positions |
+| Skills-based matching | Only assigns qualified employees to specialized roles. Ensures employees with required certifications (e.g., POS certification for cashier shifts) are matched to appropriate positions |
 | Availability constraint handling | Respects employee availability preferences and blackout periods. System never schedules employees during their marked unavailable times (e.g., Sundays for religious observances) |
 | Contract hours enforcement | Prevents over/under-scheduling per contract terms. Automatically blocks scheduling beyond agreed hours (e.g., part-timer's 20 hours/week limit) |
-| Conflict detection & resolution | Catches scheduling errors before publishing. Alerts managers to double-bookings, overlapping shifts at different locations, or other scheduling conflicts |
-| Template management for recurring schedules | Reuses proven schedule patterns for recurring events. Save templates (e.g., "Diwali Sale" schedule) and apply them with one click for future similar periods |
-| Manual override & adjustment | Allows managers to manually adjust auto-generated schedules. Provides flexibility to fine-tune schedules based on business needs or special circumstances |
+| Conflict detection | Catches scheduling errors before publishing. Alerts managers to double-bookings, overlapping shifts at different locations, or other scheduling conflicts |
+| Template support | Reuses proven schedule patterns for recurring events. Save templates (e.g., "Diwali Sale" schedule) and apply them with one click for future similar periods |
 
 **Technical Components:**
 - **Constraint solver:** Linear programming optimization (OR-Tools, OptaPlanner)
@@ -76,7 +78,35 @@
 
 ---
 
-### **Module 2: Compliance Engine**
+### **Module 2: Task & Activity-Based Operations Management**
+**Description:** Operational task management system that calculates manpower requirements based on recurring tasks (deliveries, stocking, cleaning) alongside customer service needs
+
+**Capabilities Delivered:**
+
+| Capability | Description |
+|------------|-------------|
+| Define recurring operational tasks | Set up repeating operational activities with specific requirements. Create tasks like "Delivery unloading Mon/Wed/Fri 7-9 AM, needs 3 people with forklift cert" and system ensures these are staffed every week |
+| Task-to-manpower calculation | Optimize total staff allocation across tasks and customer service. System calculates delivery (3 people) + stocking (2 people) + cashiers (4 people) = 9 total, but optimizes to 6 by intelligently reusing staff across overlapping tasks |
+| Task prioritization (P0/P1/P2 activities) | Critical tasks get guaranteed staffing allocation. P0 tasks like "Floor cleaning every 2 hours" always staffed; P2 tasks like "Storage audit" can be postponed if short-staffed during peak periods |
+| Task-specific skill requirements | Match only qualified staff to specialized tasks. System ensures only forklift-certified employees assigned to warehouse delivery unloading, blocking unqualified staff from this dangerous task |
+| Frequency-based scheduling | Automate recurring task scheduling. Tasks like "Freezer temp check every 6 hours" automatically appear in schedule at 9 AM, 3 PM, 9 PM daily without manual manager entry |
+| Store-specific task variation | Configure different operational tasks per store format. Big Bazaar has daily deliveries and bakery maintenance tasks; FabIndia boutique only has weekly inventory and window display - each configured separately |
+| Integration with demand forecasting | Unified manpower planning combining operational and customer needs. Monday 8 AM requires 3 for delivery task + 4 for customer service demand = optimized 6-person schedule accounting for task overlap |
+| Task completion tracking and compliance | Monitor and audit operational task execution. System tracks "Freezer check completed 9:05 AM by Lakshmi ✅" and alerts managers if missed - provides audit trail for food safety inspections |
+
+**Technical Components:**
+- **Task definition engine:** CRUD for operational tasks with recurrence rules
+- **Manpower calculator:** Optimization algorithm for task + demand staffing
+- **Task scheduler:** Auto-generate task assignments within rosters
+- **Completion tracker:** Real-time task status monitoring
+- **Store configurator:** Enable/disable task-based mode per store format
+- **Skills matcher:** Ensure qualified staff assigned to specialized tasks
+- **Priority engine:** Guarantee P0 task coverage during optimization
+- **Audit logger:** Immutable task completion records
+
+---
+
+### **Module 3: Compliance Engine**
 **Description:** Rules engine enforcing labor laws, awards, and company policies
 
 **Capabilities Delivered:**
@@ -99,7 +129,7 @@
 
 ---
 
-### **Module 3: Forecasting Service**
+### **Module 4: Forecasting Service**
 **Description:** Demand prediction engine using historical sales and foot traffic data
 
 **Capabilities Delivered:**
@@ -110,6 +140,7 @@
 | Seasonal/event-based adjustments | Accounts for festivals, holidays, and special events. Automatically increases staff recommendations for known high-traffic periods (e.g., 50% increase for Diwali week) based on historical data |
 | Peak hour identification | Spots busy time periods throughout the day. Identifies rush hours (e.g., 6 PM-9 PM post-office crowd) and recommends additional staff during those windows |
 | Recommended staffing levels by role/store | Suggests optimal team size by role and location. Provides specific recommendations (e.g., 8 sales floor staff + 4 cashiers + 1 supervisor) based on expected footfall and sales projections |
+| Integration with task-based scheduling | Works together with operational tasks for unified manpower planning. System combines task needs (delivery 3 people) + customer service needs (4 cashiers) = optimized schedule accounting for overlap |
 
 **Technical Components:**
 - **ML forecasting model:** Time-series prediction (Prophet, LSTM)
@@ -117,10 +148,11 @@
 - **Forecasting API:** Serve staffing recommendations
 - **Manual override:** Allow managers to adjust predictions
 - **Model training service:** Periodic retraining with new data
+- **Task integration layer:** Combine demand + task-based requirements
 
 ---
 
-### **Module 4: Workforce Management**
+### **Module 5: Workforce Management**
 **Description:** Employee master data, availability, skills, and preferences management
 
 **Capabilities Delivered:**
@@ -142,7 +174,7 @@
 
 ---
 
-### **Module 5: Time & Attendance Tracking**
+### **Module 6: Time & Attendance Tracking**
 **Description:** Clock in/out, timesheet management, and exception handling
 
 **Capabilities Delivered:**
@@ -164,7 +196,7 @@
 
 ---
 
-### **Module 6: Leave Management System**
+### **Module 7: Leave Management System**
 **Description:** Leave requests, approvals, balance tracking, and roster integration
 
 **Capabilities Delivered:**
@@ -186,7 +218,7 @@
 
 ---
 
-### **Module 7: Mobile App (iOS & Android)**
+### **Module 8: Mobile App (iOS & Android)**
 **Description:** Native mobile applications for employees and managers
 
 **Capabilities Delivered:**
@@ -210,7 +242,7 @@
 
 ---
 
-### **Module 8: Web Portal (Employee & Manager)**
+### **Module 9: Web Portal (Employee & Manager)**
 **Description:** Web-based interfaces for desktop users
 
 **Capabilities Delivered:**
@@ -232,7 +264,7 @@
 
 ---
 
-### **Module 9: Integration Layer & API Platform**
+### **Module 10: Integration Layer & API Platform**
 **Description:** External system connectors and unified API gateway
 
 **Capabilities Delivered:**
@@ -256,7 +288,7 @@
 
 ---
 
-### **Module 10: Cost Management & Budgeting**
+### **Module 11: Cost Management & Budgeting**
 **Description:** Labor cost tracking, budget management, and overtime alerts
 
 **Capabilities Delivered:**
@@ -278,7 +310,7 @@
 
 ---
 
-### **Module 11: Notification & Communication Service**
+### **Module 12: Notification & Communication Service**
 **Description:** Multi-channel notification system and in-app messaging
 
 **Capabilities Delivered:**
@@ -300,7 +332,7 @@
 
 ---
 
-### **Module 12: Analytics & Reporting Engine**
+### **Module 13: Analytics & Reporting Engine**
 **Description:** Business intelligence, dashboards, and report generation
 
 **Capabilities Delivered:**
